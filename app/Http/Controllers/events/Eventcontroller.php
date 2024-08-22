@@ -18,19 +18,19 @@ class Eventcontroller extends Controller
     public function createEvents(Request $request)
     {
         $request->validate([
-            'events_name' => 'required',
+            'event_name' => 'required',
             // 'events_thumbnail'=>'required',
-            'events_description' => 'required',
-            'events_date' => 'required',
-            'events_thumbnail_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'event_description' => 'required',
+            'event_date' => 'required',
+            'event_thumbnail_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $storeEventsImage = $request->file('events_thumbnail_image')->store('public');
+        $storeEventsImage = $request->file('event_thumbnail_image')->store('public');
         $storeEvents = Events::create([
-            'events_name' => $request->events_name,
-            'events_thumbnail_image' => $storeEventsImage,
-            'events_description' => $request->events_description,
-            'events_date' => $request->events_date,
+            'event_name' => $request->event_name,
+            'event_thumbnail_image' => $storeEventsImage,
+            'event_description' => $request->event_description,
+            'event_date' => $request->event_date,
         ]);
         $notification = array(
             'message' => ' Events is created ',
@@ -67,20 +67,20 @@ class Eventcontroller extends Controller
         if ($request->hasFile('events_thumbnail_image')) {
             // Store the new image
             Storage::delete($eventUpdate->events_thumbnail_image);
-            $storeEventsImage = $request->file('events_thumbnail_image')->store('public');
+            $storeEventsImage = $request->file('event_thumbnail_image')->store('public');
 
             $eventUpdate->update([
-                'events_name' => $request->events_name,
-                'events_thumbnail' => $storeEventsImage,
-                'events_description' => $request->events_description,
-                'events_date' => $request->events_date,
+                'event_name' => $request->event_name,
+                'event_thumbnail' => $storeEventsImage,
+                'event_description' => $request->event_description,
+                'event_date' => $request->event_date,
             ]);
         } else {
             // Update the event without changing the image
             $eventUpdate->update([
-                'events_name' => $request->events_name,
-                'events_description' => $request->events_description,
-                'events_date' => $request->events_date,
+                'event_name' => $request->event_name,
+                'event_description' => $request->event_description,
+                'event_date' => $request->event_date,
             ]);
         }
         $notification = array(

@@ -14,7 +14,7 @@
                 <div class="row mb-3">
                     <label for="example-text-input" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text"  name="events_name" id="events_name">
+                        <input class="form-control" type="text"  name="event_name" id="events_name">
                         <span class="text-danger">
                             @error('name')
                             {{$message}}
@@ -27,7 +27,7 @@
                     <label for="example-text-input" class="col-sm-2 col-form-label">Event Date</label>
                     <input type="date" class="form-control" placeholder="dd-MM-yyyy"
                         data-date-format="yyyy-mm-dd" data-date-container='#datepicker2' data-provide="datepicker"
-                        data-date-autoclose="true"  id="events_date" name="events_date">
+                        data-date-autoclose="true"  id="event_date" name="event_date">
 
                     <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                 </div><!-- input-group -->
@@ -35,7 +35,7 @@
                 <div class="row mb-3 mt-4">
                     <label for="example-text-input" class="col-sm-2 col-form-label">Description</label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="events_description" id="events_description" >
+                        <input class="form-control" type="text" name="event_description" id="events_description" >
 
                         <span class="text-danger">
                             @error('description')
@@ -47,7 +47,7 @@
                 </div>
                 <div class="input-group mb-3 mt-4">
                     <label for="example-text-input" class="col-sm-2 col-form-label">Choose Image</label>
-                    <input type="file" class="form-control" name="events_thumbnail_image" id="customFile"  accept="image/*">
+                    <input type="file" class="form-control" name="event_thumbnail_image" id="customFile"  accept="image/*">
                 </div>
 
 
