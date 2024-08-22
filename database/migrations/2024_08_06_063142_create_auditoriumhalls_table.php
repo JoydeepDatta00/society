@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('auditorium_hall_name');
             $table->unsignedBigInteger('auditorium_id');
             $table->foreign('auditorium_id')->references('id')->on('auditorium')->onDelete('cascade');
+             $table->string('seating_capacity')->nullable();
             $table->timestamps();
         });
     }

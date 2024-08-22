@@ -81,14 +81,14 @@ class Homecontroller extends Controller
             'date'               => 'required|date',
             'choose_auditorium' => 'required|string',
             'auditorium_hall'   => 'required|string',
-            'choose_slots'      => 'required|string',
+             'choose_slots'      => 'required',
             // 'services'          => 'required|string|max:255',
         ]);
 
 
         $today = Carbon::today(); // Get today's date
 
-        // Check if the combination of auditorium_hall and choose_slots is already booked for today
+        
         $existingBooking = Auditoriumbooking::where('auditorium_hall', $request->auditorium_hall)
             ->where('choose_slots', $request->choose_slots)
             ->whereDate('created_at', $today)
@@ -107,7 +107,7 @@ class Homecontroller extends Controller
                 'date' => $request->date,
                 'choose_auditorium' => $request->choose_auditorium,
                 'auditorium_hall' => $request->auditorium_hall,
-                'choose_slots' => $request->choose_slots,
+                'choose_slots' => implode(',', $request->input('choose_slots')),
                 'services' => implode(',', $request->input('services')),
                 // 'services' => $request->has('services') ? (is_array($request->services) ? implode(',', $request->services) : $request->services) : null,
 

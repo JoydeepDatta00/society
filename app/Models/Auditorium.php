@@ -13,7 +13,6 @@ class Auditorium extends Model
         'name',
         'address',
         'description',
-        'seating_capacity',
         'auditorium_image'
     ];
 }

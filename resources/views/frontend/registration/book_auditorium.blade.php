@@ -62,14 +62,18 @@
                         </select>
 
                     </div>
-                    <div class="input-field">
+                    {{-- <div class="input-field">
                         <label for="auditorium">Choose slot</label>
                         <select name="choose_slots" id="slot" >
                             <option value="" selected>-- Select One --</option>
-
-
                         </select>
 
+                    </div> --}}
+                    
+                    <div class="input-checkbox" >
+                        <h4>Choose Slots</h4>
+                        <div class="inputChecboxCon" id="slot-container">
+                        </div>
                     </div>
 
                     <div class="input-checkbox" >
@@ -77,8 +81,6 @@
                         <div class="inputChecboxCon" id="service-container">
 
                         </div>
-
-
                     </div>
 
                 </div>
@@ -133,7 +135,9 @@
     $('#hall').empty().append('<option value="" selected>-- Select One --</option>');
     if (data.length > 0) {
     $.each(data, function(key, hall) {
-    $('#hall').append('<option value="' + hall.id + '">' + hall.auditorium_hall_name || 'Unnamed Hall' + '</option>');
+    // $('#hall').append('<option value="' + hall.id + '">' + hall.auditorium_hall_name || 'Unnamed Hall' + '</option>');
+    $('#hall').append('<option value="' + hall.id + '">' + (hall.auditorium_hall_name || 'Unnamed Hall') + ' (seating capacity:' + (hall.seating_capacity || 'Unnamed Hall') + ')</option>');
+
     });
     } else {
     $('#hall').append('<option value="" selected>No halls available.</option>');
@@ -151,27 +155,37 @@
     });
     $('#hall').change(function() {
     var hallId = $(this).val();
-
     if (hallId) {
-    // Fetch slots
-    $.ajax({
-    url: '/get-hall-slots/' + hallId,
-    type: 'GET',
-    success: function(data) {
-    $('#slot').empty().append('<option value="" selected>-- Select One --</option>');
-    $.each(data, function(key, slot) {
-    $('#slot').append('<option value="' + slot.slots_time + '">' + slot.slots_time + '</option>');
-    });
-    },
-    error: function(xhr, status, error) {
-    console.error('AJAX error:', error); // Debug: Log any AJAX errors
-    }
-    });
+        // Fetch slots
+        $.ajax({
+            url: '/get-hall-slots/' + hallId,
+            type: 'GET',
+            success: function(data) {
+                $('#slot-container').empty(); // Clear existing slots
+                if (data.length > 0) {
+                    $.each(data, function(key, slot) {
+                        var checkboxHtml = `
+                        <div class="inputCheckboxCon">
+                            <input type="checkbox" id="slot-${slot.id}" name="choose_slots[]" value="${slot.slots_time}">
+                            <label for="slot-${slot.id}">${slot.slots_time}</label>
+                        </div>`;
+                        $('#slot-container').append(checkboxHtml);
+                    });
+                } else {
+                    $('#slot-container').append('<p>No slots available for the selected auditorium.</p>');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX error:', error);
+            }
+        });
     } else {
-    $('#slot').empty().append('<option value="" selected>-- Select Hall First --</option>');
+        $('#slot-container').empty().append('<p>Please select a hall first.</p>');
     }
-    });
-    });
+});
+        });
+
+    
 </script>
 @if (session('error'))
 <script>
@@ -242,12 +256,6 @@
             $('#slot').css('border', '1px solid red');
             isValid = false;
             }
-            // if ($('#service-container').val().trim() === '') {
-            // toastr.error('services is required.');
-            // $('#service-container').css('border', '1px solid red');
-            // isValid = false;
-            // }
-
             if (!isValid) {
             e.preventDefault(); // Prevent form submission if validation fails
             }

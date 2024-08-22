@@ -17,11 +17,12 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('organization_name');
-            $table->date('date');
+            $table->string('services');
             $table->string('choose_auditorium');
             $table->string('auditorium_hall');
             $table->string('choose_slots');
-            $table->string('services');
+            $table->date('date');
+            $table->unique(['date','choose_slots']);
             $table->timestamps();
         });
     }

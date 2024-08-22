@@ -17,7 +17,6 @@ return new class extends Migration
             $table->mediumText('description');
             $table->string('address');
             $table->string('auditorium_image')->nullable();
-            $table->string('seating_capacity')->nullable();
             $table->timestamps();
         });
     }

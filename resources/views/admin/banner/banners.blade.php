@@ -19,7 +19,7 @@
                 <div class="row mb-3">
                     <label for="example-text-input" class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text"  name="banner_name" id="example-text-input">
+                        <input class="form-control" type="text"  name="banner_name" id="name">
                     </div>
                 </div>
 
@@ -40,12 +40,45 @@
             </div>-->
                 <!-- end row -->
 
-             <input type="submit"  class="btn btn-success btn-rounded waves-effect waves-light"   name="submit" value="Add Banner ">
+             <input type="submit"  class="btn btn-success btn-rounded waves-effect waves-light"  id="submitBtn"  name="submit" value="Add Banner ">
 
                 </form>
                 <!-- end row -->
             </div>
         </div>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+                    </script>
+    <script>
+    $(document).ready(function() {
+        $('#submitBtn').on('click', function(e) {
+            let isValid = true;
+
+            // Clear previous error messages and remove error borders
+            $('input').css('border', '');
+            toastr.clear();
+
+            // Validate Name
+            if ($('#name').val().trim() === '') {
+                toastr.error('Name is required.');
+                $('#name').css('border', '1px solid red');
+                isValid = false;
+            }
+
+            // Validate File Input
+            if ($('#customFile')[0].files.length === 0) {
+                toastr.error('Banner image is required.');
+                $('#customFile').css('border', '1px solid red');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                e.preventDefault(); // Prevent form submission if validation fails
+            }
+        });
+    });
+</script>
+
+
 
  @php
  $bannersImages=getBannerImages();
@@ -103,4 +136,5 @@
 </div>
 </div>
 </div>
+
 @endsection

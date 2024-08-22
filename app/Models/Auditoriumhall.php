@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Auditoriumhall extends Model
 {
     use HasFactory;
-    protected $fillable=['auditorium_id','auditorium_hall_name'];
+    protected $fillable=['auditorium_id','auditorium_hall_name','seating_capacity',];
 }
