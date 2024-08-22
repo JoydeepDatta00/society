@@ -13,6 +13,7 @@ class Events extends Model
         'event_description',
         'event_date',
         'event_thumbnail_image',
+        'event_video_link',
     ];
 
 }

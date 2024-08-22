@@ -1,6 +1,8 @@
+
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -31,6 +33,7 @@
                 <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
+        <a href="/register">Register</a>
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))

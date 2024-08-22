@@ -32,6 +32,13 @@
                                     <input class="form-control" type="text" name="auditorium_hall_name" id="auditorium_hall_name">
                                 </div>
                             </div>
+                        <div class="row mb-3 mt-4">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Auditorium  Seating Capacity</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="number" name="seating_capacity"
+                                    id="seating_capacity">
+                            </div>
+                        </div>
                             <input type="submit" class="btn btn-success btn-rounded waves-effect waves-light"
                                 name="submit" value="Add Hall " id="submitBtn">
 
