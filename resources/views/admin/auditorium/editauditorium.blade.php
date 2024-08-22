@@ -32,13 +32,7 @@
                                 <input class="form-control" type="text" name="address" id="address" value="{{ $auditoriums->address }}">
                             </div>
                         </div>
-                         <div class="row mb-3 mt-4">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Auditorium  Seating Capacity</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="number" name="seating_capacity"
-                                    id="seating_capacity" value="{{$auditoriums->seating_capacity}}">
-                            </div>
-                        </div>
+                        
                         <div class="input-group mb-3 mt-4">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Choose Image</label>
                             <input type="file" class="form-control" name="auditorium_image" id="customFile"
@@ -50,7 +44,7 @@
                             value="update Auditorium  " id="submitBtn">
 
                     </form>
-                    <div class="mt-4 text-danger"> Note:Click in add icon to add event image required* </div>
+                  
 
                     <!-- end row -->
                 </div>

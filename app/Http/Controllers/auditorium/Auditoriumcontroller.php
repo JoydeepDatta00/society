@@ -27,7 +27,7 @@ class Auditoriumcontroller extends Controller
             'address' => 'required',
             'description' => 'required',
             'auditorium_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'seating_capacity'=>'required'
+           
 
         ]);
         $auditoriumImages = $request->file('auditorium_image')->store('public');
@@ -36,7 +36,7 @@ class Auditoriumcontroller extends Controller
             'address' => $request->address,
             'description' => $request->description,
             'auditorium_image' => $auditoriumImages,
-            'seating_capacity'=>$request->seating_capacity,
+            
         ]);
 
         if ($addAuditorium) {
@@ -74,14 +74,14 @@ class Auditoriumcontroller extends Controller
                 'address' => $request->address,
                 'description' => $request->description,
                 'auditorium_image' => $updateAuditoriumImage,
-                'seating_capacity'=>$request->seating_capacity,
+                
             ]);
         } else {
             $updateAuditorium->update([
                 'name' => $request->name,
                 'description' => $request->description,
                 'address' => $request->address,
-                 'seating_capacity'=>$request->seating_capacity,
+                 
 
             ]);
         }
@@ -226,9 +226,16 @@ class Auditoriumcontroller extends Controller
     }
     public function storeAuditoriumHall(Request $request)
     {
+        $request->validate([
+             'seating_capacity'=>'required',
+             'auditorium_hall_name'=>'required',
+        ]);
+
         $auditoriumHall = Auditoriumhall::create([
             'auditorium_id' => $request->auditorium_id,
             'auditorium_hall_name' => $request->auditorium_hall_name,
+             'seating_capacity'=>$request-> seating_capacity,
+            
         ]);
         if ($auditoriumHall) {
             return redirect()->back()->with(['message' => 'auditorium hall created successfully!', 'alert-type' => 'success']);
