@@ -69,7 +69,7 @@
                         </select>
 
                     </div> --}}
-                    
+
                     <div class="input-checkbox" >
                         <h4>Choose Slots</h4>
                         <div class="inputChecboxCon" id="slot-container">
@@ -185,7 +185,7 @@
 });
         });
 
-    
+
 </script>
 @if (session('error'))
 <script>

@@ -32,19 +32,15 @@
                                 <input class="form-control" type="text" name="address" id="address" value="{{ $auditoriums->address }}">
                             </div>
                         </div>
-                        
                         <div class="input-group mb-3 mt-4">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Choose Image</label>
                             <input type="file" class="form-control" name="auditorium_image" id="customFile"
                                 accept="image/*">
                         </div>
-
-
                         <input type="submit" class="btn btn-success btn-rounded waves-effect waves-light" name="submit"
                             value="update Auditorium  " id="submitBtn">
-
                     </form>
-                  
+
 
                     <!-- end row -->
                 </div>
@@ -60,12 +56,8 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                           <h4 class="card-title">Auditorium Halls</h4>
-                       <a href="" class="btn btn-success sm" title="Add Audutorium Halls" id="delete"> <i class="fas fa-plus-square"></i></a>
+                       <a href="/admin/auditotium-hall" class="btn btn-success sm" title="Add Audutorium Halls" id="delete"> <i class="fas fa-plus-square"></i></a>
                         </div>
-
-
-
-
                         <table id="selection-datatable" class="table dt-responsive nowrap w-100">
                             <thead>
                                 <tr>
@@ -100,7 +92,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h4 class="card-title">Auditorium Services</h4>
-                            <a href="" class="btn btn-success sm" title="Add Audutorium Slots" id="delete"> <i class="fas fa-plus-square"></i></a>
+                            <a href="/admin/create-auditorium-services" class="btn btn-success sm" title="Add Audutorium Slots" id="delete"> <i class="fas fa-plus-square"></i></a>
                         </div>
 
 
@@ -140,7 +132,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h4 class="card-title">Auditorium Hall & slots</h4>
-                            <a href="" class="btn btn-success sm" title="Add Slots" id="delete"> <i class="fas fa-plus-square"></i></a>
+                            <a href="/admin/auditorium-slots" class="btn btn-success sm" title="Add Slots" id="delete"> <i class="fas fa-plus-square"></i></a>
 
                         </div>
 

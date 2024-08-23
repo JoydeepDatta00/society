@@ -28,26 +28,7 @@ $getGallery=$gallery->sortByDesc('created_at')->take(4);
                     </a>
             @endforeach
 
-            {{-- <a href="Gallery/gallery1.html">
-                <div class="gallery-item">
-                    <img src="images//banner/pexels-leonardo-luncasu-1230168729-23812823.jpg" alt="">
-                    <div class="gallery-con">
-                        <h4>Gallery 2</h4>
-                        <p>16th July 2024</p>
-                    </div>
-
-                </div>
-            </a>
-            <a href="Gallery/gallery1.html">
-                <div class="gallery-item">
-                    <img src="images/banner/pexels-vietfotos-18238104.jpg" alt="">
-                    <div class="gallery-con">
-                        <h4>Gallery 3</h4>
-                        <p>16th July 2024</p>
-                    </div>
-
-                </div>
-            </a> --}}
+         
 
         </div>
     </div>

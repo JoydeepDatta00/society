@@ -1,4 +1,5 @@
 @extends('admin_master')
+@section('title','Banners')
 @section('admin')
 
 <div class="page-content">

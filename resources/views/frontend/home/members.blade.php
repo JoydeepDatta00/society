@@ -32,33 +32,7 @@
             </div>
             @endforeach
 
-            {{-- <div class="memberBoxCon">
-                <div class="memberBox">
-                    <img src="images/dummy.jpg" alt="">
-                    <h6>Member Name</h6>
-                    <p>Designation</p>
-                    <p>9845671456</td>
-                    <p>member2024@gmail.com</p>
-                </div>
-            </div>
-            <div class="memberBoxCon">
-                <div class="memberBox">
-                    <img src="images/dummy.jpg" alt="">
-                    <h6>Member Name</h6>
-                    <p>Designation</p>
-                    <p>9845671456</td>
-                    <p>member2024@gmail.com</p>
-                </div>
-            </div>
-            <div class="memberBoxCon">
-                <div class="memberBox">
-                    <img src="images/dummy.jpg" alt="">
-                    <h6>Member Name</h6>
-                    <p>Designation</p>
-                    <p>9845671456</td>
-                    <p>member2024@gmail.com</p>
-                </div>
-            </div> --}}
+           
         </div>
     </div>
 </section>

@@ -1,4 +1,5 @@
 @extends('admin_master')
+@section('title','Auditorium Hall')
 @section('admin')
 <div class="page-content">
     <div class="container-fluid">
@@ -22,7 +23,7 @@
                                         <option>Click here and Choose the option</option>
                                         @foreach ($auditoriumData as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach 
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -43,7 +44,7 @@
                                 name="submit" value="Add Hall " id="submitBtn">
 
                     </form>
-                
+
 
                     <!-- end row -->
                 </div>

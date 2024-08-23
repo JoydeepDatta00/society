@@ -1,4 +1,5 @@
 @extends('admin_master')
+@section('title','Feedbacks')
 @section('admin')
 <div class="page-content">
     <div class="container-fluid">

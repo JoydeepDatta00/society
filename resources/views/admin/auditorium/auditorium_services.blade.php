@@ -1,4 +1,5 @@
 @extends('admin_master')
+@section('title','Auditorium Services')
 @section('admin')
 <div class="page-content">
     <div class="container-fluid">
@@ -52,7 +53,7 @@
                             value="Add Auditorium services " id="submitBtn">
 
                     </form>
-                   
+
 
                     <!-- end row -->
                 </div>

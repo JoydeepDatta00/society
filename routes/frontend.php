@@ -13,6 +13,9 @@ Route::get('/thankyou', function () {
 Route::get('/feedback', function () {
     return view('frontend.registration.contact_us');
 });
+Route::get('/services', function () {
+    return view('frontend.home.services');
+});
 
 
 // Route::middleware(['auth'])->group(
