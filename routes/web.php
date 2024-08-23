@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Admincontroller;
-use App\Http\Controllers\auditorium\Auditoriumcontroller;
-use App\Http\Controllers\banner\Bannercontroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\events\Eventcontroller;
-use App\Http\Controllers\gallery\Gallerycontroller;
+use App\Http\Controllers\banner\Bannercontroller;
 use App\Http\Controllers\member\Membercontroller;
+use App\Http\Controllers\gallery\Gallerycontroller;
+use App\Http\Controllers\auditorium\Auditoriumcontroller;
 
 Route::get('/', function () {
     return view('frontend.index');

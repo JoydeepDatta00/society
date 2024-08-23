@@ -27,33 +27,7 @@
 
                             </li>
                             @endforeach
-                            {{-- <li>
-                                <div class="hall">
-                                    <img src="images/banner/pexels-gnasralla-3866658.jpg" alt="">
-                                    <div class="hallDescription">
-                                        <h2>Muktadhara</h2>
-                                        <p>Organises various programs ,conferences,meetings.capacity of around
-                                            600.Has 2
-                                            green rooms on either side.stage space is decent.</p>
-                                        <h6>R7JG+X7M, Krishna Nagar, Agartala, Tripura 799001</h6>
-                                    </div>
-                                </div>
-
-                            </li>
-
-                            <li>
-                                <div class="hall">
-                                    <img src="images/banner/pexels-vietfotos-18238104.jpg" alt="">
-                                    <div class="hallDescription">
-                                        <h2>Muktadhara</h2>
-                                        <p>Organises various programs ,conferences,meetings.capacity of around
-                                            600.Has 2
-                                            green rooms on either side.stage space is decent.</p>
-                                        <h6>R7JG+X7M, Krishna Nagar, Agartala, Tripura 799001</h6>
-                                    </div>
-                                </div>
-
-                            </li> --}}
+                            
                         </ul>
                         <button class="prev" id="prev1"><i class="fa-solid fa-chevron-left"></i></button>
                         <button class="next" id="next1">
@@ -75,7 +49,7 @@
                     and more recently with desktop publishing software like Aldus PageMaker including versions of
                     Lorem Ipsum.
                 </p>
-                <a href="book-auditorium.html">
+                <a href="/book-auditorium">
                     Book Now
                 </a>
 

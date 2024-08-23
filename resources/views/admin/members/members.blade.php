@@ -1,4 +1,5 @@
 @extends('admin_master')
+@section('title','Members')
 @section('admin')
 <div class="page-content">
     <div class="container-fluid">
