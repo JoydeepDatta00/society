@@ -90,9 +90,18 @@
     .banner-sec .banner-grid {
         flex-direction: column;
         row-gap: 8px;
-        padding-top: 130px;
+        padding-top: 42px;
     }
-
+    .promotionSection{
+        padding: 0 20px;
+        width: calc(100% - 40px);
+    }
+    .promotionSectionFlex iframe {
+        border-radius: 20px;
+        overflow: hidden;
+        height: 180px;
+        width: 220px;
+      }
     .dummy-box {
         width: 116px;
         height: 102px;

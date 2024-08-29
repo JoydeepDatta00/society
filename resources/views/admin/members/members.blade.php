@@ -1,5 +1,5 @@
 @extends('admin_master')
-@section('title','Members')
+@section('title', 'Members')
 @section('admin')
 <div class="page-content">
     <div class="container-fluid">
@@ -39,10 +39,16 @@
                         </div>
 
                         <div class="row mb-3 mt-4">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Member designation </label>
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Member Designation </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" name="member_designation"
                                     id="member_designation">
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-4">
+                            <label for="example-text-input" class="col-sm-2 col-form-label">Member Description </label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="input-group mb-3 mt-4">
@@ -64,58 +70,58 @@
             <script src="https://code.jquery.com/jquery-3.6.0.min.js">
             </script>
             <script>
-         $(document).ready(function() {
-        $('#submitBtn').on('click', function(e) {
-        let isValid = true;
+                $(document).ready(function () {
+                    $('#submitBtn').on('click', function (e) {
+                        let isValid = true;
 
-        // Clear previous error messages and remove error borders
-        $('input').css('border', '');
-        // $('span.text-danger').text('');
-        toastr.clear();
+                        // Clear previous error messages and remove error borders
+                        $('input').css('border', '');
+                        // $('span.text-danger').text('');
+                        toastr.clear();
 
-        // Validate Name
-        if ($('#member_name').val().trim() === '') {
-       toastr.error('Members name is required.');
-        $('#member_name').css('border', '1px solid red');
-        isValid = false;
-        }
+                        // Validate Name
+                        if ($('#member_name').val().trim() === '') {
+                            toastr.error('Members name is required.');
+                            $('#member_name').css('border', '1px solid red');
+                            isValid = false;
+                        }
 
-        // Validate Date
-        if ($('#member_email').val().trim() === '') {
-        toastr.error('Event date is required.');
-        $('#member_email').css('border', '1px solid red');
-        isValid = false;
-        }
-        //validate phone
-        if ($('#member_phone_no').val().trim() === '' || !/^[\d\s\(\)\-]{10}$/.test($('#member_phone_no').val().trim())) {
-        toastr.error('Phone number must contain between 10  digits.');
-        $('#member_phone_no').css('border', '1px solid red');
-        isValid = false;
-        }
+                        // Validate Date
+                        if ($('#member_email').val().trim() === '') {
+                            toastr.error('Event date is required.');
+                            $('#member_email').css('border', '1px solid red');
+                            isValid = false;
+                        }
+                        //validate phone
+                        if ($('#member_phone_no').val().trim() === '' || !/^[\d\s\(\)\-]{10}$/.test($('#member_phone_no').val().trim())) {
+                            toastr.error('Phone number must contain between 10  digits.');
+                            $('#member_phone_no').css('border', '1px solid red');
+                            isValid = false;
+                        }
 
-        // Validate Description
-        if ($('#member_designation').val().trim() === '') {
-       toastr.error('Member designation is required.');
-        $('#member_designation').css('border', '1px solid red');
-        isValid = false;
-        }
+                        // Validate Description
+                        if ($('#member_designation').val().trim() === '') {
+                            toastr.error('Member designation is required.');
+                            $('#member_designation').css('border', '1px solid red');
+                            isValid = false;
+                        }
 
-        // Validate Image
-        if ($('#customFile').val().trim() === '') {
-       toastr.error('Image is required.');
-        $('#customFile').css('border', '1px solid red');
-        isValid = false;
-        }
+                        // Validate Image
+                        if ($('#customFile').val().trim() === '') {
+                            toastr.error('Image is required.');
+                            $('#customFile').css('border', '1px solid red');
+                            isValid = false;
+                        }
 
-        if (!isValid) {
-        e.preventDefault(); // Prevent form submission if validation fails
-        }
-        });
-        });
+                        if (!isValid) {
+                            e.preventDefault(); // Prevent form submission if validation fails
+                        }
+                    });
+                });
             </script>
 
             @php
-            $memberData = getMemberData();
+                $memberData = getMemberData();
             @endphp
 
             <div class="row">
@@ -140,30 +146,30 @@
                                 <tbody>
                                     @php($i=1)
                                     @foreach($memberData as $item)
-                                    <tr>
-                                        <td scope="row">{{$i++}}</td>
-                                        <td>{{$item->member_name}}</td>
-                                        <td>
-                                            {{$item->member_email}}
-                                        </td>
-                                        <td>{{$item->member_designation}}</td>
-                                        <td>
-                                            @if($item->member_image)
-                                            <img src="{{ Storage::url($item?->member_image) }}"
-                                                alt="Event Thumbnail" class="img-thumbnail"
-                                                style="max-width: 100px; max-height: 100px;">
-                                            @else
-                                            <span>No image</span>
-                                            @endif
-                                        </td>
-                                        <td>
+                                        <tr>
+                                            <td scope="row">{{$i++}}</td>
+                                            <td>{{$item->member_name}}</td>
+                                            <td>
+                                                {{$item->member_email}}
+                                            </td>
+                                            <td>{{$item->member_designation}}</td>
+                                            <td>
+                                                @if($item->member_image)
+                                                    <img src="{{ Storage::url($item?->member_image) }}" alt="Event Thumbnail"
+                                                        class="img-thumbnail" style="max-width: 100px; max-height: 100px;">
+                                                @else
+                                                    <span>No image</span>
+                                                @endif
+                                            </td>
+                                            <td>
 
-                                            <a href="{{"/admin/edit-members/".encryptId($item['id'])}}" class="btn btn-info sm"
-                                                title="Edit Event"> <i class="fas fa-edit"></i></a>
-                                            <a href="{{" /admin/delete-events/".$item['id']}}" class="btn btn-danger sm"
-                                                title="Delete Data" id="delete"> <i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
+                                                <a href="{{"/admin/edit-members/" . encryptId($item['id'])}}"
+                                                    class="btn btn-info sm" title="Edit Event"> <i
+                                                        class="fas fa-edit"></i></a>
+                                                <a href="{{" /admin/delete-events/" . $item['id']}}" class="btn btn-danger sm"
+                                                    title="Delete Data" id="delete"> <i class="fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
                                     @endforeach
 
                                 </tbody>

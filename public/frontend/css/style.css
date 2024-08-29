@@ -164,7 +164,7 @@ header {
 .header {
   width: 96%;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr;
   align-items: center;
 }
 
@@ -200,7 +200,7 @@ header {
 }
 
 .header h1 {
-  font-size: 20px;
+  font-size: 28px;
   font-family: 'Perpetua';
   color: #1C1839;
   font-weight: 400;
@@ -1002,7 +1002,7 @@ header .main-header {
 .banner-right .flower-pattern {
   position: absolute;
   right: 16px;
-  bottom: 38%;
+  bottom: 65%;
 }
 
 .banner-right .flower-pattern img {
@@ -3125,4 +3125,128 @@ form .submit {
   margin-top: 4px;
   font-size: 14px;
   font-family: 'soleil-light';
+}
+
+.promotionSection {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.promotionSectionFlex {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+  width: 100%;
+  overflow: auto;
+
+}
+
+.promotionSectionFlex iframe {
+  border-radius: 20px;
+  overflow: hidden;
+  height: 280px;
+  width: 400px;
+}
+
+/* width */
+.promotionSectionFlex::-webkit-scrollbar {
+  height: 8px;
+}
+
+/* Track */
+.promotionSectionFlex::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+.promotionSectionFlex::-webkit-scrollbar-thumb {
+  background: #BB7600;
+  border-radius: 10px;
+}
+
+.promotionSectionFlex .promotionLive {
+  position: relative;
+}
+
+.promotionSectionFlex .promotionLive::after {
+  content: 'Live';
+  width: 50px;
+  display: flex;
+  height: 22px;
+  background-color: red;
+  color: #fff;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 4;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px;
+  animation: blink 3s infinite;
+}
+@keyframes blink {
+  from{
+    transform: scale(1);
+  }
+  to{
+    transform: scale(0.8);
+  }
+}
+
+
+.profileGrid{
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 100px;
+}
+
+.profileGrid .profileDetails{
+  border: 4px solid var(--primary-color);
+  padding: 20px;
+}
+.profileGrid .profileDetails h3{
+  margin-bottom: 10px;
+}
+.profileGrid .profileDetails h5{
+  margin-bottom: 10px;
+}
+
+.profileGrid .profileDetails button{
+  border: none;
+  padding: 8px 10px;
+  background-color: var(--black-one);
+  color: #fff;
+  font-weight: bold;
+}
+
+
+.bookingHistory{
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr;
+  align-items: center;
+  padding: 16px 20px;
+  border: 1px solid #ddd;
+}
+.bookingHistory .status{
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  width: fit-content;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 14px;
+}
+.bookingHistory .operation{
+  
+}
+.bookingHistory button{
+  border: none;
+  padding: 8px 10px;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: bold;
 }

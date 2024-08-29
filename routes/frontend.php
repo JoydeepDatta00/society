@@ -16,6 +16,15 @@ Route::get('/feedback', function () {
 Route::get('/services', function () {
     return view('frontend.home.services');
 });
+Route::get('/userlogin', function () {
+    return view('frontend.loginRegistration.userlogin');
+});
+Route::get('/userregistration', function () {
+    return view('frontend.loginRegistration.userregistration');
+});
+Route::get('/userprofile', function () {
+    return view('frontend.loginRegistration.userProfile');
+});
 
 
 // Route::middleware(['auth'])->group(
