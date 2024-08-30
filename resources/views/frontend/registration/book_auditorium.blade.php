@@ -49,7 +49,7 @@
                     </div>
                     <div class="input-field">
                         <label>Event File</label>
-                        <input name="" type="file"  id="" style="border:none; padding:0">
+                        <input name="" type="file"  id="">
                     </div>
                     <div class="input-field">
                         <label>Url for webcasting (if any)</label>
