@@ -39,6 +39,12 @@
                         <img src="{{ asset('frontend/images/less-then.png') }}" alt="">
                     </li>
                 </a>
+                <a href="/userprofile">
+                    <li>
+                        <p>Profile</p>
+                        <img src="{{ asset('frontend/images/less-then.png') }}" alt="">
+                    </li>
+                </a>
                 <a href="/members">
                     <li>
                         <p>Members</p>

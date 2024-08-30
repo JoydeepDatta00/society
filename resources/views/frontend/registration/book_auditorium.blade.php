@@ -43,6 +43,19 @@
                         <label>Enter Date</label>
                         <input name="date" type="date"  id="date" >
                     </div>
+                    <div class="input-field">
+                        <label>Enter Event Name</label>
+                        <input name="" type="text"  id="" >
+                    </div>
+                    <div class="input-field">
+                        <label>Event File</label>
+                        <input name="" type="file"  id="">
+                    </div>
+                    <div class="input-field">
+                        <label>Url for webcasting (if any)</label>
+                        <input name="" type="link"  id="" >
+                    </div>
+                    
 
                     <div class="input-field">
                         <label for="auditorium">Choose An Auditorium</label>

@@ -55,7 +55,7 @@
                         <li><a href="/admin/create-auditorium-services">Add Auditorium Services</a></li>
                         <li><a href="/admin/auditotium-hall">Add Auditorium hall</a></li>
                         <li><a href="/admin/auditorium-slots">Add Auditorium slots</a></li>
-
+                        <li><a href="/admin/manager">Add Manager</a></li>
                     </ul>
                 </li>
                 <li>

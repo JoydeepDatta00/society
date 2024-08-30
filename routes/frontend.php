@@ -16,6 +16,19 @@ Route::get('/feedback', function () {
 Route::get('/services', function () {
     return view('frontend.home.services');
 });
+Route::get('/userlogin', function () {
+    return view('frontend.loginRegistration.userlogin');
+});
+Route::get('/userregistration', function () {
+    return view('frontend.loginRegistration.userregistration');
+});
+Route::get('/userprofile', function () {
+    return view('frontend.loginRegistration.userProfile');
+});
+Route::get('/full_booking_history', function () {
+    return view('frontend.loginRegistration.full_booking_history');
+});
+
 
 
 // Route::middleware(['auth'])->group(
@@ -46,3 +59,8 @@ Route::controller(Homecontroller::class)->group(
 );
 //     }
 // );
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/manager', function () {
+        return view('admin.auditorium.manager');
+    });
+});

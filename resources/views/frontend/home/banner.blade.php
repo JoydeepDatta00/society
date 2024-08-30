@@ -1,7 +1,7 @@
 @php
-$getBannerImages=getBannerImages();
-$getMember=getMemberData();
-$members=$getMember->take(2);
+    $getBannerImages = getBannerImages();
+    $getMember = getMemberData();
+    $members = $getMember->take(2);
 @endphp
 
 
@@ -11,7 +11,7 @@ $members=$getMember->take(2);
             <div class="flower-pattern-top">
                 <img src="images/RED flower Hero.png" alt="">
             </div>
-            <div class="right-logo">
+            <!-- <div class="right-logo">
                 <div class="emblam">
                     <img src="{{ asset('frontend/logo/emblem-dark.png') }}" alt="">
                 </div>
@@ -20,26 +20,49 @@ $members=$getMember->take(2);
                     <h6>Society for Management of Cultural Complex</h6>
                 </div>
 
-            </div>
-            <h2><span>Members</span>
+            </div> -->
+            <h2><span>Promotion</span>
                 <div class="dummy-box"></div>
             </h2>
-            <div class="minister-sec">
-              @foreach ($members as $member )
-                <div class="minister">
-                    <div class="minister-photo">
-                        <img src="{{Storage::url($member->member_image) }}" alt="">
+
+            <div class="promotionSection">
+                <div class="promotionSectionFlex">
+
+                <!-- ---- for live event -->
+                    <div class="promotionLive">
+                        <iframe width="" height=""
+                            src="https://www.youtube.com/embed/JeuqMnAiJws?si=-vTw74WTxYQ9kvv5"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
-                    <div class="minister-des">
-                        <p>{{ $member->member_designation }}</p>
-                        <h6>{{ $member->member_name }}</h6>
+
+
+ <!-- ---- for pre event videos -->
+                    <div class="promotionPre">
+                        <iframe width="" height=""
+                            src="https://www.youtube.com/embed/5GlS9pyqBgM?si=R5g8I2Or-qN2rcCj"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="promotionPre">
+                        <iframe width="" height=""
+                            src="https://www.youtube.com/embed/5GlS9pyqBgM?si=R5g8I2Or-qN2rcCj"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="promotionPre">
+                        <iframe width="" height=""
+                            src="https://www.youtube.com/embed/5GlS9pyqBgM?si=R5g8I2Or-qN2rcCj"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                 </div>
-              @endforeach
-
-
-
             </div>
+
             <div class="flower-pattern">
                 <img src="{{ asset('frontend/images/RED flower Hero.png') }}" alt="">
             </div>
@@ -64,9 +87,9 @@ $members=$getMember->take(2);
         <div class="banner-left">
             <div class="slider" id="slider1">
                 <ul class="slideWrap" id="slideWrap1">
-                   @foreach ( $getBannerImages as $bannerImages )
-                      <li><img src="{{ Storage::url($bannerImages?->banner_image) }}" alt=""></li>
-                   @endforeach
+                    @foreach ($getBannerImages as $bannerImages)
+                        <li><img src="{{ Storage::url($bannerImages?->banner_image) }}" alt=""></li>
+                    @endforeach
 
                 </ul>
                 <button class="prev" id="prev1"><i class="fa-solid fa-chevron-left"></i></button>
@@ -110,4 +133,3 @@ $members=$getMember->take(2);
     </div>
 
 </section>
-
