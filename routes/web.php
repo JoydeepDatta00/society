@@ -81,6 +81,9 @@ Route::middleware(['auth'])->group(function () {
         //========
         Route::get('/admin/feedbacks', 'getFeedbacks');
         Route::get('/admin/registrations', 'getRegistrations');
+        Route::get('/admin/full-registrations', function () {
+            return view('admin.registrations.full-registrations');
+        });
     });
 });
 //============members section===========
