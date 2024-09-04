@@ -35,12 +35,13 @@
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                    <span class="d-none d-xl-inline-block ms-1">{{ Auth::user()->name }}</span>
+                    {{-- <span class="d-none d-xl-inline-block ms-1">{{ Auth::user()->name }}</span> --}}
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="/admin/edit/profile"><i class="ri-user-line align-middle me-1"></i> Profile</a>
+                    <a class="dropdown-item" href="/admin/edit/profile"><i class="ri-user-line align-middle me-1"></i>
+                        Profile</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="{{ route('admin.logout') }}"><i
                             class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
