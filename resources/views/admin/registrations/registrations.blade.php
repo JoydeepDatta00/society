@@ -17,14 +17,11 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
                                     <th>Organization Name</th>
-                                    <th>date</th>
-                                    <th>choose Auditorium</th>
-                                    <th>Auditorium hall</th>
-                                    <th>Slots</th>
+                                    <th>Date</th>
+                                    <th>Auditorium</th>
                                     <th>Services</th>
+                                    <th>Operations</th>
                                 </tr>
                             </thead>
 
@@ -43,6 +40,22 @@
                                     <td>{{ $booking->services}}</td>
                                 </tr>
                                 @endforeach
+                                <tr>
+                                    <td>Bishal</td>
+                                    <td>ABC Organization</td>
+                                    <td>10/09/2024</td>
+                                    <td>ABC Auditorium</td>
+                                    <td>Service A, Service B</td>
+                                    <td><button class="btn btn-primary">Manage</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Joydeep</td>
+                                    <td>PQR Organization</td>
+                                    <td>17/09/2024</td>
+                                    <td>ABC Auditorium</td>
+                                    <td>Service A, Service D</td>
+                                    <td><button class="btn btn-primary">Manage</button></td>
+                                </tr>
 
 
                             </tbody>
@@ -54,5 +67,7 @@
 
     </div>
 </div>
+
+
 
 @endsection
