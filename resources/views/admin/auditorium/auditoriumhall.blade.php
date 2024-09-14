@@ -1,57 +1,62 @@
 @extends('admin_master')
-@section('title','Auditorium Hall')
+@section('title', 'Auditorium Hall')
 @section('admin')
-<div class="page-content">
-    <div class="container-fluid">
+    <div class="page-content">
+        <div class="container-fluid">
 
 
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
 
-                    <h4 class="card-title">Add Auditorium Hall</h4>
-                    <form action="{{ route('admin.storeAuditoriumHall') }}" method="post" enctype="multipart/form-data">
-                        @csrf
+                        <h4 class="card-title">Add Auditorium Hall</h4>
+                        <form action="{{ route('admin.storeAuditoriumHall') }}" method="post" enctype="multipart/form-data">
+                            @csrf
 
-                        <div class="row mb-3 mt-4">
-                            {{-- <div class="mb-0"> --}}
+                            <div class="row mb-3 mt-4">
+                                {{-- <div class="mb-0"> --}}
                                 <label for="example-text-input" class="col-sm-2 col-form-label"> Choose Auditorium
                                 </label>
                                 <div class="col-sm-10">
-                                    <select class="form-control select2-search-disable" name="auditorium_id"
+                                    {{-- <select class="form-control select2-search-disable" name="auditorium_id"
                                         id="auditorium_id">
                                         <option>Click here and Choose the option</option>
                                         @foreach ($auditoriumData as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
-                                    </select>
+                                    </select> --}}
+                                    <input type="hidden" name="auditorium_id" value="{{ $auditoriumData->id }}"
+                                        id="auditorium_id">
+                                    <input class="form-control" type="text"
+                                        value="{{ getByAuditoriumName($auditoriumData->id) }}" @readonly(true)>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Auditorium Hall name</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" name="auditorium_hall_name" id="auditorium_hall_name">
+                                    <input class="form-control" type="text" name="auditorium_hall_name"
+                                        id="auditorium_hall_name">
                                 </div>
                             </div>
-                        <div class="row mb-3 mt-4">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Auditorium  Seating Capacity</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="number" name="seating_capacity"
-                                    id="seating_capacity">
+                            <div class="row mb-3 mt-4">
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Auditorium Seating
+                                    Capacity</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="number" name="seating_capacity"
+                                        id="seating_capacity">
+                                </div>
                             </div>
-                        </div>
                             <input type="submit" class="btn btn-success btn-rounded waves-effect waves-light"
                                 name="submit" value="Add Hall " id="submitBtn">
 
-                    </form>
+                        </form>
 
 
-                    <!-- end row -->
+                        <!-- end row -->
+                    </div>
                 </div>
-            </div>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js">
-            </script>
-            {{-- <script>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                {{-- <script>
                 $(document).ready(function() {
                 $('#submitBtn').on('click', function(e) {
                     let isValid = true;
@@ -104,9 +109,9 @@
 
 
 
-        </div> <!-- end col -->
+            </div> <!-- end col -->
+        </div>
     </div>
-</div>
-</div>
+    </div>
 
 @endsection

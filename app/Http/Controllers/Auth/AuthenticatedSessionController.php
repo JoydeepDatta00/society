@@ -26,9 +26,29 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-        $request->session()->regenerate();
+        // $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // return redirect()->intended(route('dashboard', absolute: false));
+
+        $roleType = $request->input('role_type');
+        if (Auth::user()->role_type === $roleType) {
+            $request->session()->regenerate();
+            if ($roleType === 'chairman') {
+                return redirect()->route('chairman.dashboard');
+            } elseif ($roleType === 'user') {
+                return redirect()->route('user.profile');
+            } elseif ($roleType === 'manager') {
+                return redirect()->route('manager.dashboard');
+            } else {
+                // Handle other roles or default redirect
+                // return redirect()->route('default.dashboard');
+                return redirect('/');
+            }
+        } else {
+            // Deny login
+            Auth::logout();
+            return back()->withErrors(['email' => 'You do not have the required role to log in.']);
+        }
     }
 
     /**

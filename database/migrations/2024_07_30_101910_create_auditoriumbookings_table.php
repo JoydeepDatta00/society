@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('auditoriumbookings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
             $table->string('email');
             $table->string('phone');
@@ -22,7 +24,11 @@ return new class extends Migration
             $table->string('auditorium_hall');
             $table->string('choose_slots');
             $table->date('date');
-            $table->unique(['date','choose_slots']);
+            $table->unique(['date', 'choose_slots']);
+            $table->string('allowed_status')->default('pending');
+            $table->string('url_for_webcasting')->nullable();
+            $table->string('event_name');
+            $table->string('event_image');
             $table->timestamps();
         });
     }

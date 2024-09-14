@@ -51,18 +51,18 @@
                                                 @endif
                                                 <!-- -->
                                             </td>
-                                            @if (Auth::user()->role_type === 'manager')
-                                                <td><a href="/chairman/full-registrations/{{ encryptId($booking->id) }}"
+                                            {{-- @if (Auth::user()->role_type === 'manager')
+                                                <td><a href="/manager/full-registrations/{{ encryptId($booking->id) }}"
                                                         class="btn btn-primary">Manage</a></td>
-                                            @elseif(Auth::user()->role_type === 'chairman')
-                                                <td>
-                                                    {{-- <a href="/chairman/full-registrations/{{ encryptId($booking->id) }}"
+                                            @elseif(Auth::user()->role_type === 'chairman') --}}
+                                            <td>
+                                                {{-- <a href="/chairman/full-registrations/{{ encryptId($booking->id) }}"
                                                         class="btn btn-primary m-1">add promotion</a> --}}
-                                                    <a href="/chairman/full-registrations/{{ encryptId($booking->id) }}"
-                                                        class="btn btn-primary">Manage</a>
-                                                </td>
-                                            @else
-                                            @endif
+                                                <a href="/manager/full-registrations/{{ encryptId($booking->id) }}"
+                                                    class="btn btn-primary">Manage</a>
+                                            </td>
+                                            {{-- @else
+                                            @endif --}}
 
                                         </tr>
                                     @endforeach

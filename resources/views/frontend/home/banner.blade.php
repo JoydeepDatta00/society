@@ -24,22 +24,42 @@
             <h2><span>Promotion</span>
                 <div class="dummy-box"></div>
             </h2>
+            @php
+                $promotionContent = App\Models\Promotions::all();
+            @endphp
 
             <div class="promotionSection">
                 <div class="promotionSectionFlex">
 
-                <!-- ---- for live event -->
-                    <div class="promotionLive">
+                    <!-- ---- for live event -->
+                    {{-- <div class="promotionLive">
                         <iframe width="" height=""
                             src="https://www.youtube.com/embed/JeuqMnAiJws?si=-vTw74WTxYQ9kvv5"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
+                    </div> --}}
 
 
- <!-- ---- for pre event videos -->
-                    <div class="promotionPre">
+
+                    <!-- ---- for pre event videos -->
+                    @foreach ($promotionContent as $promotion)
+                        <div class="promotionPre">
+                            @if ($promotion->iframe_links)
+                                <iframe width="" height="" src="{{ $promotion->iframe_links }}"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            @elseif ($promotion->promotion_images)
+                                <img class="img-fluid" src="{{ Storage::url($promotion?->promotion_images) }}"
+                                    alt="">
+                            @else
+                            @endif
+
+                        </div>
+                    @endforeach
+
+                    {{-- <div class="promotionPre">
                         <iframe width="" height=""
                             src="https://www.youtube.com/embed/5GlS9pyqBgM?si=R5g8I2Or-qN2rcCj"
                             title="YouTube video player" frameborder="0"
@@ -52,14 +72,7 @@
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                    <div class="promotionPre">
-                        <iframe width="" height=""
-                            src="https://www.youtube.com/embed/5GlS9pyqBgM?si=R5g8I2Or-qN2rcCj"
-                            title="YouTube video player" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
@@ -74,8 +87,7 @@
             </div>
 
             <div class="mobile-slide-down">
-                <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
-                    type="module"></script>
+                <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 
                 <dotlottie-player src="https://lottie.host/08075ebc-3e42-49b1-a7aa-4481f1669851/WQWg0IgE6x.json"
                     background="transparent" speed="1" style="width: 36px; height: 36px;" loop autoplay>
@@ -121,8 +133,7 @@
 
     <div class="scroll-sec">
         <div class="scroll-item">
-            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module">
-            </script>
+            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 
             <a href="#about">
                 <dotlottie-player src="https://lottie.host/edb4f303-25eb-48c7-a73e-1bda81e2f327/tgElcBo5FC.json"

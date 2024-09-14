@@ -13,6 +13,8 @@ use App\Models\Eventsgallery;
 use App\Models\Galleryimages;
 use App\Models\Auditoriumbooking;
 use App\Http\Controllers\Controller;
+use App\Models\Addpromotion;
+use Illuminate\Support\Facades\Auth;
 
 class Homecontroller extends Controller
 {
@@ -81,14 +83,19 @@ class Homecontroller extends Controller
             'date'               => 'required|date',
             'choose_auditorium' => 'required|string',
             'auditorium_hall'   => 'required|string',
-             'choose_slots'      => 'required',
+            'choose_slots'      => 'required',
+            'event_name'        => 'required',
+            'url_for_webcasting' => 'url',
+            'user_id' => 'required',
+            //'event_image' => 'required|mimes:jpg,jpeg,png'
             // 'services'          => 'required|string|max:255',
         ]);
 
 
         $today = Carbon::today(); // Get today's date
+        $eventImage = $request->file('event_image')->store('public');
 
-        
+
         $existingBooking = Auditoriumbooking::where('auditorium_hall', $request->auditorium_hall)
             ->where('choose_slots', $request->choose_slots)
             ->whereDate('created_at', $today)
@@ -105,10 +112,14 @@ class Homecontroller extends Controller
                 'phone' => $request->phone,
                 'organization_name' => $request->organization_name,
                 'date' => $request->date,
+                'user_id' => $request->user_id,
                 'choose_auditorium' => $request->choose_auditorium,
                 'auditorium_hall' => $request->auditorium_hall,
                 'choose_slots' => implode(',', $request->input('choose_slots')),
                 'services' => implode(',', $request->input('services')),
+                'event_name' => $request->event_name,
+                'url_for_webcasting' => $request->url_for_webcasting,
+                'event_image' => $eventImage,
                 // 'services' => $request->has('services') ? (is_array($request->services) ? implode(',', $request->services) : $request->services) : null,
 
             ]);
@@ -132,5 +143,77 @@ class Homecontroller extends Controller
         } else {
             return redirect()->back();
         }
+    }
+    public function userprofile()
+    {
+        $auditoriumBookingData = Auditoriumbooking::where('user_id', Auth::user()->id)->get();
+
+        return view('frontend.loginregistration.userprofile', compact('auditoriumBookingData'));
+    }
+    public function getViewBookings($id)
+    {
+        $decryptId = decryptId($id);
+        $auditoriumBookingsData = Auditoriumbooking::find($decryptId);
+
+        $getPromotionData = Addpromotion::where('booking_id', $decryptId)->where('user_id', Auth::user()->id)->get();
+
+
+        return view('frontend.loginregistration.full_booking_history', compact('auditoriumBookingsData', 'getPromotionData'));
+    }
+    public function storePromotionLink(Request $request)
+    {
+        $storePromotionLink = Addpromotion::create([
+            'promotion_link' => $request->promotion_link,
+            'booking_id' => $request->booking_id,
+            'user_id' => $request->user_id,
+        ]);
+        if ($storePromotionLink) {
+            return redirect()->back()->with([
+                'message' => 'promotion link data  stored',
+                'alert-type' => 'success'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'message' => 'promotion link data not found',
+                'alert-type' => 'error'
+            ]);
+        }
+    }
+    public function storePromotionImage(Request $request)
+    {
+        $promotionImages = $request->file('promotion_image')->store('public');
+
+        $storePromotionImage = Addpromotion::create([
+            'promotion_image' => $promotionImages,
+            'booking_id' => $request->booking_id,
+            'user_id' => $request->user_id,
+        ]);
+        if ($storePromotionImage) {
+            return redirect()->back()->with([
+                'message' => 'promotion Image  data  stored',
+                'alert-type' => 'success'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'message' => 'promotion image data not found',
+                'alert-type' => 'error'
+            ]);
+        }
+    }
+    public function updateWebcastingUrl(Request $request)
+    {
+
+        $updateUrl =  Auditoriumbooking::find($request->id);
+
+        if ($updateUrl) {
+            $updateUrl->update([
+                'url_for_webcasting' => $request->url_for_webcasting,
+            ]);
+            $updateUrl->save();
+        }
+        return redirect()->back()->with([
+            'message' => 'promotion image data not found',
+            'alert-type' => 'error'
+        ]);
     }
 }

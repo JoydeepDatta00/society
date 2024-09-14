@@ -1,157 +1,155 @@
 @extends('admin_master')
 @section('admin')
-<div class="page-content">
-    <div class="container-fluid">
+    <div class="page-content">
+        <div class="container-fluid">
 
 
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
 
-                    <h4 class="card-title">Add Auditorium</h4>
-                    <form action="{{ route('admin.addauditorium') }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Auditorium Name</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" name="name" id="name">
+                        <h4 class="card-title">Add Auditorium</h4>
+                        <form action="{{ route('admin.addauditorium') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row mb-3">
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Auditorium Name</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" name="name" id="name">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                        <label for="example-text-input" class="col-sm-2 col-form-label">Auditorium description</label>
-                             <div class="col-sm-10">
-                                 <input class="form-control" type="text" name="description" id="description">
+                            <div class="row mb-3">
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Auditorium
+                                    description</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" name="description" id="description">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-3 mt-4">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Auditorium Address</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" name="address"
-                                    id="address">
+                            <div class="row mb-3 mt-4">
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Auditorium Address</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" name="address" id="address">
+                                </div>
                             </div>
-                        </div>
-                      
-                        <div class="input-group mb-3 mt-4">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Choose Image</label>
-                            <input type="file" class="form-control" name="auditorium_image" id="customFile"
-                                accept="image/*">
-                        </div>
+
+                            <div class="input-group mb-3 mt-4">
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Choose Image</label>
+                                <input type="file" class="form-control" name="auditorium_image" id="customFile"
+                                    accept="image/*">
+                            </div>
 
 
-                        <input type="submit" class="btn btn-success btn-rounded waves-effect waves-light" name="submit"
-                            value="Add Auditorium " id="submitBtn">
+                            <input type="submit" class="btn btn-success btn-rounded waves-effect waves-light"
+                                name="submit" value="Add Auditorium " id="submitBtn">
 
-                    </form>
-                   
-                    <!-- end row -->
+                        </form>
+
+                        <!-- end row -->
+                    </div>
                 </div>
-            </div>
 
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
 
-                            <h4 class="card-title">Document table</h4>
+                                <h4 class="card-title">Document table</h4>
 
 
-                            <table id="selection-datatable" class="table dt-responsive nowrap w-100">
-                                <thead>
-                                    <tr>
-                                        <th>sl no.</th>
-                                        <th>Name </th>
-                                        <th>Address</th>
-                                      
-                                        <th>Auditorium Images</th>
-                                        <th>Operation</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php($i=1)
-                                    @foreach($auditoriums as $item)
-                                    <tr>
-                                        <td scope="row">{{$i++}}</td>
-                                        <td>{{$item->name}}</td>
-                                        <td>
-                                            {{$item->address}}
-                                        </td>
-                                      
+                                <table id="selection-datatable" class="table dt-responsive nowrap w-100">
+                                    <thead>
+                                        <tr>
+                                            <th>sl no.</th>
+                                            <th>Name </th>
+                                            <th>Address</th>
 
-                                        <td>
-                                            @if($item->auditorium_image)
-                                            <img src="{{Storage::url($item?->auditorium_image) }}" alt="Event Thumbnail"
-                                                class="img-thumbnail" style="max-width: 100px; max-height: 100px;">
-                                            @else
-                                            <span>No image</span>
-                                            @endif
-                                        </td>
-                                        <td>
+                                            <th>Auditorium Images</th>
+                                            <th>Operation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php($i = 1)
+                                        @foreach ($auditoriums as $item)
+                                            <tr>
+                                                <td scope="row">{{ $i++ }}</td>
+                                                <td>{{ $item->name }}</td>
+                                                <td>
+                                                    {{ $item->address }}
+                                                </td>
+                                                <td>
+                                                    @if ($item->auditorium_image)
+                                                        <img src="{{ Storage::url($item?->auditorium_image) }}"
+                                                            alt="Event Thumbnail" class="img-thumbnail"
+                                                            style="max-width: 100px; max-height: 100px;">
+                                                    @else
+                                                        <span>No image</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <a href="{{ ' /chairman/edit-auditoirum/' . encryptId($item['id']) }}"
+                                                        class="btn btn-info sm" title="Edit Event"> <i
+                                                            class="fas fa-edit"></i></a>
+                                                    <a href="{{ '/chairman/delete-auditorium/' . encryptId($item['id']) }}"
+                                                        class="btn btn-danger sm" title="Delete Data" id="delete"> <i
+                                                            class="fas fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
 
-                                            <a href="{{" /admin/edit-auditoirum/".encryptId($item['id'])}}" class="btn btn-info sm"
-                                                title="Edit Event"> <i class="fas fa-edit"></i></a>
-                                            <a href="{{"/admin/delete-auditorium/".encryptId($item['id'])}}" class="btn btn-danger sm"
-                                                title="Delete Data" id="delete"> <i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
+                                    </tbody>
+                                </table>
 
-                                </tbody>
-                            </table>
+                            </div> <!-- end card body-->
+                        </div> <!-- end card -->
+                    </div><!-- end col-->
+                </div>
 
-                        </div> <!-- end card body-->
-                    </div> <!-- end card -->
-                </div><!-- end col-->
-            </div>
-
-        </div> <!-- end col -->
+            </div> <!-- end col -->
+        </div>
     </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
-</script>
-<script>
-    $(document).ready(function() {
-        $('#submitBtn').on('click', function(e) {
-        let isValid = true;
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#submitBtn').on('click', function(e) {
+                let isValid = true;
 
-        // Clear previous error messages and remove error borders
-        $('input').css('border', '');
-        // $('span.text-danger').text('');
-        toastr.clear();
+                // Clear previous error messages and remove error borders
+                $('input').css('border', '');
+                // $('span.text-danger').text('');
+                toastr.clear();
 
-        // Validate Name
-        if ($('#name').val().trim() === '') {
-       toastr.error('Name is required.');
-        $('#name').css('border', '1px solid red');
-        isValid = false;
-        }
-        if ($('#description').val().trim() === '') {
-        toastr.error('Description is required.');
-        $('#description').css('border', '1px solid red');
-        isValid = false;
-        }
+                // Validate Name
+                if ($('#name').val().trim() === '') {
+                    toastr.error('Name is required.');
+                    $('#name').css('border', '1px solid red');
+                    isValid = false;
+                }
+                if ($('#description').val().trim() === '') {
+                    toastr.error('Description is required.');
+                    $('#description').css('border', '1px solid red');
+                    isValid = false;
+                }
 
-        // Validate Date
-        if ($('#address').val().trim() === '') {
-        toastr.error('Address is required.');
-        $('#address').css('border', '1px solid red');
-        isValid = false;
-        }
+                // Validate Date
+                if ($('#address').val().trim() === '') {
+                    toastr.error('Address is required.');
+                    $('#address').css('border', '1px solid red');
+                    isValid = false;
+                }
 
-        // Validate Image
-        if ($('#customFile').val().trim() === '') {
-       toastr.error('Auditorium Image is required.');
-        $('#customFile').css('border', '1px solid red');
-        isValid = false;
-        }
+                // Validate Image
+                if ($('#customFile').val().trim() === '') {
+                    toastr.error('Auditorium Image is required.');
+                    $('#customFile').css('border', '1px solid red');
+                    isValid = false;
+                }
 
-        if (!isValid) {
-        e.preventDefault(); // Prevent form submission if validation fails
-        }
+                if (!isValid) {
+                    e.preventDefault(); // Prevent form submission if validation fails
+                }
+            });
         });
-        });
-</script>
-
+    </script>
 @endsection

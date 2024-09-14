@@ -1,47 +1,42 @@
 @extends('admin_master')
-@section('title','Auditorium Slots')
+@section('title', 'Auditorium Slots')
 @section('admin')
-<div class="page-content">
-    <div class="container-fluid">
+    <div class="page-content">
+        <div class="container-fluid">
 
 
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
 
-                    <h4 class="card-title">Add Auditorium</h4>
-                    <form action="{{ route('admin.createslots') }}" method="post" enctype="multipart/form-data">
-                        @csrf
+                        <h4 class="card-title">Add Auditorium</h4>
+                        <form action="{{ route('admin.createslots') }}" method="post" enctype="multipart/form-data">
+                            @csrf
 
-                        <div class="row mb-3 mt-4">
-                            {{-- <div class="mb-0"> --}}
+                            <div class="row mb-3 mt-4">
+                                {{-- <div class="mb-0"> --}}
                                 <label for="example-text-input" class="col-sm-2 col-form-label"> Choose Auditorium
                                 </label>
                                 <div class="col-sm-10">
-                                    <select class="form-control select2-search-disable" name="auditorium_id"
+                                    <input type="hidden" name="auditorium_id" value="{{ $auditoriumData->id }}"
                                         id="auditorium_id">
-                                        <option>Click here and Choose the option</option>
-                                        @foreach ($auditoriumData as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-
-
-                                    </select>
+                                    <input class="form-control" type="text"
+                                        value="{{ getByAuditoriumName($auditoriumData->id) }}" @readonly(true)>
                                 </div>
 
 
                             </div>
                             <div class="row mb-3 mt-4">
                                 {{-- <div class="mb-0"> --}}
-                                    <label for="example-text-input" class="col-sm-2 col-form-label"> Choose Auditorium Hall
-                                    </label>
+                                <label for="example-text-input" class="col-sm-2 col-form-label"> Choose Auditorium Hall
+                                </label>
 
-                            <div class="col-sm-10">
-                                <select class="form-control select2-search-disable" name="hall_id" id="hall_id">
-                                    <option>Click here and Choose the option</option>
+                                <div class="col-sm-10">
+                                    <select class="form-control select2-search-disable" name="hall_id" id="hall_id">
+                                        <option>Click here and Choose the option</option>
 
-                                </select>
-                            </div>
+                                    </select>
+                                </div>
                             </div>
                             <div class="row mb-3 mt-4">
                                 <label for="start-time" class="col-sm-2 col-form-label">Slots Timing</label>
@@ -60,107 +55,114 @@
                             <input type="submit" class="btn btn-success btn-rounded waves-effect waves-light"
                                 name="submit" value="Add Slots " id="submitBtn">
 
-                    </form>
+                        </form>
 
-                    <!-- end row -->
+                        <!-- end row -->
+                    </div>
                 </div>
-            </div>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js">
-            </script>
-           <script>
-            $(document).ready(function() {
-                $('#submitBtn').on('click', function(e) {
-                    let isValid = true;
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        $('#submitBtn').on('click', function(e) {
+                            let isValid = true;
 
-                    // Clear previous error messages and remove error borders
-                    $('input').css('border', '');
-                    toastr.clear();
+                            // Clear previous error messages and remove error borders
+                            $('input').css('border', '');
+                            toastr.clear();
 
-                    // Validate Start Time
-                    if ($('#start-time').val().trim() === '') {
-                        toastr.error('Start time is required.');
-                        $('#start-time').css('border', '1px solid red');
-                        isValid = false;
-                    }
+                            // Validate Start Time
+                            if ($('#start-time').val().trim() === '') {
+                                toastr.error('Start time is required.');
+                                $('#start-time').css('border', '1px solid red');
+                                isValid = false;
+                            }
 
-                    // Validate End Time
-                    if ($('#end-time').val().trim() === '') {
-                        toastr.error('End time is required.');
-                        $('#end-time').css('border', '1px solid red');
-                        isValid = false;
-                    }
+                            // Validate End Time
+                            if ($('#end-time').val().trim() === '') {
+                                toastr.error('End time is required.');
+                                $('#end-time').css('border', '1px solid red');
+                                isValid = false;
+                            }
 
-                    // Concatenate and validate slots time if both times are provided
-                    if ($('#start-time').val().trim() !== '' && $('#end-time').val().trim() !== '') {
-                        const startTime = $('#start-time').val();
-                        const endTime = $('#end-time').val();
-                        $('#slots_time').val(`${startTime} - ${endTime}`);
-                    }
+                            // Concatenate and validate slots time if both times are provided
+                            if ($('#start-time').val().trim() !== '' && $('#end-time').val().trim() !== '') {
+                                const startTime = $('#start-time').val();
+                                const endTime = $('#end-time').val();
+                                $('#slots_time').val(`${startTime} - ${endTime}`);
+                            }
 
-                    Validate Slots Time (hidden input)
-                    if ($('#slots_time').val().trim() === '') {
-                        toastr.error('Slots time is required.');
-                        $('#slots_time').css('border', '1px solid red');
-                        isValid = false;
-                    }
+                            Validate Slots Time(hidden input)
+                            if ($('#slots_time').val().trim() === '') {
+                                toastr.error('Slots time is required.');
+                                $('#slots_time').css('border', '1px solid red');
+                                isValid = false;
+                            }
 
-                    // Validate Auditorium ID
-                    if ($('#auditorium_id').val().trim() === '') {
-                        toastr.error('Choosing an auditorium is required.');
-                        $('#auditorium_id').css('border', '1px solid red');
-                        isValid = false;
-                    }
+                            // Validate Auditorium ID
+                            if ($('#auditorium_id').val().trim() === '') {
+                                toastr.error('Choosing an auditorium is required.');
+                                $('#auditorium_id').css('border', '1px solid red');
+                                isValid = false;
+                            }
 
-                    if (!isValid) {
-                        e.preventDefault(); // Prevent form submission if validation fails
-                    }
-                });
-            });
-        </script>
-        <script>
-       $(document).ready(function() {
-    $('#auditorium_id').on('change', function() {
-    const auditoriumId = $(this).val();
-    const hallSelect = $('#hall_id');
+                            if (!isValid) {
+                                e.preventDefault(); // Prevent form submission if validation fails
+                            }
+                        });
+                    });
+                </script>
 
-    // Clear the current options in the hall dropdown
-    hallSelect.html('<option value="">Loading...</option>');
+                <script>
+                    $(document).ready(function() {
+                        // Get the auditorium ID from the hidden input field
+                        const auditoriumId = $('#auditorium_id').val().trim();
+                        const hallSelect = $('#hall_id');
 
-    // Send an AJAX request to fetch the halls
-    $.ajax({
-    url: `/get-halls/${auditoriumId}`,
-    type: 'GET',
-    dataType: 'json',
-    success: function(data) {
-    console.log('Received data:', data);
+                        // Only make the AJAX request if the auditoriumId is not empty
+                        if (auditoriumId) {
+                            // Clear the current options in the hall dropdown
+                            hallSelect.html('<option value="">Loading...</option>');
 
-    // Clear the loading option
-    hallSelect.html('<option value="">Click here and Choose the option</option>');
+                            // Send an AJAX request to fetch the halls
+                            $.ajax({
+                                url: `/get-halls/${auditoriumId}`,
+                                type: 'GET',
+                                dataType: 'json',
+                                success: function(data) {
+                                    console.log('Received data:', data);
 
-    // Populate the halls dropdown with the fetched data
-    if (data && data.length > 0) {
-    $.each(data, function(index, hall) {
-    hallSelect.append(`<option value="${hall.id}">${hall.auditorium_hall_name}</option>`);
-    });
-    } else {
-    hallSelect.html('<option value="">No halls found</option>');
-    }
-    },
-    error: function(xhr, status, error) {
-    console.error('Error fetching halls:', error);
-    hallSelect.html('<option value="">Failed to load halls</option>');
-    }
-    });
-    });
-    });
-</script>
+                                    // Clear the loading option
+                                    hallSelect.html('<option value="">Click here and Choose the option</option>');
+
+                                    // Populate the halls dropdown with the fetched data
+                                    if (data && data.length > 0) {
+                                        $.each(data, function(index, hall) {
+                                            hallSelect.append(
+                                                `<option value="${hall.id}">${hall.auditorium_hall_name}</option>`
+                                            );
+                                        });
+                                    } else {
+                                        hallSelect.html('<option value="">No halls found</option>');
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error('Error fetching halls:', error);
+                                    hallSelect.html('<option value="">Failed to load halls</option>');
+                                }
+                            });
+                        } else {
+                            // If the auditoriumId is empty, reset the dropdown
+                            hallSelect.html('<option value="">Select Hall</option>');
+                        }
+                    });
+                </script>
 
 
 
-        </div> <!-- end col -->
+            </div> <!-- end col -->
+        </div>
     </div>
-</div>
-</div>
+    </div>
 
 
 @endsection
