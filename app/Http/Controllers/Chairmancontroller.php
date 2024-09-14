@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\auditorium;
+namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Slots;
 use App\Models\Feedback;
 use App\Models\Auditorium;
@@ -10,9 +11,15 @@ use App\Models\Auditoriumhall;
 use App\Models\Auditoriumbooking;
 use App\Models\Auditoriumservices;
 use App\Http\Controllers\Controller;
+use App\Models\Addpromotion;
+use App\Models\Promotions;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Storage;
 
-class Auditoriumcontroller extends Controller
+
+class Chairmancontroller extends Controller
 {
     public function auditorium()
     {
@@ -27,7 +34,6 @@ class Auditoriumcontroller extends Controller
             'address' => 'required',
             'description' => 'required',
             'auditorium_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-           
 
         ]);
         $auditoriumImages = $request->file('auditorium_image')->store('public');
@@ -36,7 +42,7 @@ class Auditoriumcontroller extends Controller
             'address' => $request->address,
             'description' => $request->description,
             'auditorium_image' => $auditoriumImages,
-            
+
         ]);
 
         if ($addAuditorium) {
@@ -57,7 +63,7 @@ class Auditoriumcontroller extends Controller
         $auditoriumId = decryptId($auditorium_id);
         $auditoriumHalls = Auditoriumhall::where('auditorium_id', $auditoriumId)->get();
         $auditoriumServices = Auditoriumservices::where('auditorium_id', $auditoriumId)->get();
-        $auditoriumSlots = Slots::where('auditorium_id', $auditoriumId)->get();
+        $auditoriumSlots = Slots::where('auditorium_id', $auditoriumId)->orderBy('hall_id')->get();
         $auditoriums = Auditorium::find($auditoriumId);
         return view('admin.auditorium.editauditorium', compact('auditoriums', 'auditoriumHalls', 'auditoriumSlots', 'auditoriumServices'));
     }
@@ -74,14 +80,14 @@ class Auditoriumcontroller extends Controller
                 'address' => $request->address,
                 'description' => $request->description,
                 'auditorium_image' => $updateAuditoriumImage,
-                
+
             ]);
         } else {
             $updateAuditorium->update([
                 'name' => $request->name,
                 'description' => $request->description,
                 'address' => $request->address,
-                 
+
 
             ]);
         }
@@ -110,38 +116,6 @@ class Auditoriumcontroller extends Controller
             ]);
         }
     }
-    //====================Auditorium Services============
-    public function auditoriumServices()
-    {
-        $auditoriumData = Auditorium::all();
-        return view('admin.auditorium.auditorium_services', compact('auditoriumData'));
-    }
-    public function createAuditoriumServices(Request $request)
-    {
-        $request->validate([
-            'services_name' => 'required',
-            'auditorium_id' => 'required',
-            'service_note'=>'required',
-            'service_cost'=>'required'
-        ]);
-        $createServices = Auditoriumservices::create([
-            'services_name' => $request->services_name,
-            'auditorium_id' => $request->auditorium_id,
-            'service_note'=>$request->service_note,
-            'service_cost'=>$request->service_cost,
-        ]);
-        if ($createServices) {
-            return redirect()->back()->with(['message' => 'Auditorium Services created successfully!', 'alert-type' => 'success']);
-        } else {
-            return redirect()->back()->with(['message' => 'Auditorium Services not found', 'alert-type' => 'error']);
-        }
-    }
-        public function editAuditoriumServices($id)
-    {
-        $suditoriumId = decryptId($id);
-        $editServices = Auditoriumservices::find($id);
-        return view('admin.auditorium.edit_auditorium_services', compact('editServices'));
-    }
     public function deleteAuditouriumServices($id)
     {
         $decryptId = decryptId($id);
@@ -160,41 +134,6 @@ class Auditoriumcontroller extends Controller
                 'message' => 'Auditorium data not found',
                 'alert-type' => 'error'
             ]);
-        }
-    }
-    //=================================auditorium Slots========
-    public function auditoriumSlots()
-    {
-        $auditoriumData = Auditorium::all();
-
-        return view('admin.auditorium.auditorium_slots', compact('auditoriumData'));
-    }
-    public function createAuditoriumSlots(Request $request)
-    {
-        $request->validate([
-            'auditorium_id' => 'required'
-        ]);
-        $slotsTime = $request->start_time . ' - ' . $request->end_time;
-
-        $existingSlot = Slots::where('auditorium_id', $request->auditorium_id)
-            ->where('slots_time', $slotsTime)
-            ->whereDate('created_at', now()->toDateString())
-            ->get();
-
-        if (count($existingSlot) > 0) {
-            return redirect()->back()->with(['message' => 'Same slot time exists on this date, please enter another slot.', 'alert-type' => 'error']);
-        } else {
-            $addAuditoriumSlots = Slots::create([
-                'slots_time' => $slotsTime,
-                'hall_id' => $request->hall_id,
-                'auditorium_id' => $request->auditorium_id,
-            ]);
-            if ($addAuditoriumSlots) {
-
-                return redirect()->back()->with(['message' => 'Slots created successfully!', 'alert-type' => 'success']);
-            } else {
-                return redirect()->back()->with(['message' => 'slots not found', 'alert-type' => 'error']);
-            }
         }
     }
     public function deleteSlots($id)
@@ -218,31 +157,6 @@ class Auditoriumcontroller extends Controller
             ]);
         }
     }
-    // auditorium hall
-    public function auditoriumHall()
-    {
-        $auditoriumData = Auditorium::all();
-        return view('admin.auditorium.auditoriumhall', compact('auditoriumData'));
-    }
-    public function storeAuditoriumHall(Request $request)
-    {
-        $request->validate([
-             'seating_capacity'=>'required',
-             'auditorium_hall_name'=>'required',
-        ]);
-
-        $auditoriumHall = Auditoriumhall::create([
-            'auditorium_id' => $request->auditorium_id,
-            'auditorium_hall_name' => $request->auditorium_hall_name,
-             'seating_capacity'=>$request-> seating_capacity,
-            
-        ]);
-        if ($auditoriumHall) {
-            return redirect()->back()->with(['message' => 'auditorium hall created successfully!', 'alert-type' => 'success']);
-        } else {
-            return redirect()->back()->with(['message' => 'auditorium hall  not found!', 'alert-type' => 'error']);
-        }
-    }
     public function deleteHalls($id)
     {
         $decryptId = decryptId($id);
@@ -264,8 +178,6 @@ class Auditoriumcontroller extends Controller
             ]);
         }
     }
-    //get dynamic data
-
     public function getHalls($auditoriumId)
     {
         $halls = getHallsByAuditoriumId($auditoriumId);
@@ -276,9 +188,64 @@ class Auditoriumcontroller extends Controller
         $feedbacks = Feedback::all();
         return view('admin.registrations.feedbacks', compact('feedbacks'));
     }
-    public function getRegistrations()
+
+    public function getChairmanRegistration()
     {
         $bookings = Auditoriumbooking::all();
         return view('admin.registrations.registrations', compact('bookings'));
+    }
+    public function getChairmanRegistrationsDetails($registration_id)
+    {
+        $decryptKey = decryptId($registration_id);
+        $getBookingDetails = Auditoriumbooking::find($decryptKey);
+        $promotionalDetails = Addpromotion::where('booking_id', $decryptKey)->get();
+        // dd($promotionalDetails);
+        return view('admin.registrations.full-registrations', compact('getBookingDetails', 'promotionalDetails'));
+    }
+
+    public function bannerPromotion()
+    {
+        $promotion = Promotions::all();
+        return view('admin.registrations.add_promotion', compact('promotion'));
+    }
+    public function storeBannerPromotion(Request $request)
+    {
+        $request->validate([
+            'promotion_images' => 'mimes:png,jpg,jpeg|max:4000',
+        ]);
+        $storageImage = $request->file('promotion_images')
+            ? $request->file('promotion_images')->store('public')
+            : null;
+
+        $addPromotions = Promotions::create([
+            'promotion_images' => $storageImage,
+            'iframe_links' => $request->iframe_links,
+        ]);
+        if ($addPromotions) {
+            return redirect()->back()
+                ->with([
+                    'message' => 'data added successfully!',
+                    'alert-type' => 'success'
+                ]);
+        }
+    }
+    public function deleteBannerPromotion($id)
+    {
+        $promotion = Promotions::find($id);
+        if ($promotion) {
+            Storage::delete($promotion->promotion_images);
+
+            $promotion->delete();
+
+            return redirect()->back()->with([
+                'message' => 'Data deleted successfully!',
+                'alert-type' => 'success'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'message' => 'Data data not found',
+                'alert-type' => 'error'
+            ]);
+        }
     }
 }

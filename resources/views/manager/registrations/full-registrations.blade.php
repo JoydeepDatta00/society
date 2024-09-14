@@ -97,57 +97,54 @@
                         <div class="col-md-5">
                             <div class="card">
                                 <div class="card-body">
-                                    <h2 class="mb-2">Current Status</h2>
+                                    <h2 class="mb-2">Change Status</h2>
                                     <hr>
-
-                                    {{-- <form action="{{ url('/update/booking-status') }}" method="post">
-                                        @csrf --}}
-                                    {{-- <input type="hidden" name="booking_id" value="{{ $getBookingDetails->id }}"> --}}
-                                    <input class="form-control" type="text"
-                                        value="{{ $getBookingDetails->allowed_status }}" @readonly(true)>
-                                    {{-- <select class="form-select mb-3" aria-label="Default select example"
-                                        name="allowed_status">
-                                        <option value="Pending"
-                                            {{ $getBookingDetails->allowed_status == 'Pending' ? 'selected' : '' }}>
-                                            Pending
-                                        </option>
-                                        <option value="Approved"
-                                            {{ $getBookingDetails->allowed_status == 'Approved' ? 'selected' : '' }}>
-                                            Approved
-                                        </option>
-                                        <option value="Rejected"
-                                            {{ $getBookingDetails->allowed_status == 'Rejected' ? 'selected' : '' }}>
-                                            Rejected
-                                        </option>
-                                    </select> --}}
-                                    {{-- @if (Auth::user()->role_type === 'manager')
+                                    <form action="{{ url('/update/booking-status') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="booking_id" value="{{ $getBookingDetails->id }}">
+                                        <select class="form-select mb-3" aria-label="Default select example"
+                                            name="allowed_status">
+                                            <option value="Pending"
+                                                {{ $getBookingDetails->allowed_status == 'Pending' ? 'selected' : '' }}>
+                                                Pending
+                                            </option>
+                                            <option value="Approved"
+                                                {{ $getBookingDetails->allowed_status == 'Approved' ? 'selected' : '' }}>
+                                                Approved
+                                            </option>
+                                            <option value="Rejected"
+                                                {{ $getBookingDetails->allowed_status == 'Rejected' ? 'selected' : '' }}>
+                                                Rejected
+                                            </option>
+                                        </select>
+                                        @if (Auth::user()->role_type === 'manager')
                                             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                                         @else
-                                        @endif --}}
-                                    {{-- </form> --}}
+                                        @endif
+                                    </form>
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="card-body">
                                     <h2 class="mb-2">Promotions</h2>
                                     <hr>
-                                    @foreach ($promotionalDetails as $details)
-                                        @if ($details->promotion_link)
+                                    @foreach ($userPromotionalDetails as $promotionDetails)
+                                        @if ($promotionDetails->promotion_link)
                                             <div class="border-bottom border-secondary mb-4">
                                                 <span
-                                                    class="badge badge-soft-dark mb-1">{{ $details->created_at->format('d/m/y') }}</span>
-                                                <h6><a href="{{ $details->promotion_link }}"
-                                                        target="_blank">{{ $details->promotion_link }}</a></h6>
+                                                    class="badge badge-soft-dark mb-1">{{ $promotionDetails->created_at->format('d/m/y') }}</span>
+                                                <h6><a href="{{ $promotionDetails->promotion_link }}"
+                                                        target="_blank">{{ $promotionDetails->promotion_link }}</a></h6>
 
                                                 <label for="example-text-input" class="col-sm-2 col-form-label"> promotion
                                                     link</label>
                                             </div>
-                                        @elseif ($details->promotion_image)
+                                        @elseif ($promotionDetails->promotion_image)
                                             <div class="border-bottom border-secondary mb-4">
                                                 <span
-                                                    class="badge badge-soft-dark mb-1">{{ $details->created_at->format('d/m/y') }}</span>
-                                                <img src="{{ Storage::url($details->promotion_image) }}" class="img-fluid"
-                                                    alt="...">
+                                                    class="badge badge-soft-dark mb-1">{{ $promotionDetails->created_at->format('d/m/y') }}</span>
+                                                <img src="{{ Storage::url($promotionDetails->promotion_image) }}"
+                                                    class="img-fluid" alt="...">
 
                                             </div>
                                         @else

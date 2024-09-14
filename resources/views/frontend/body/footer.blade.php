@@ -16,9 +16,12 @@
                         </div>
                     </div>
                     <div class="social-foot">
-                        <a href="#" target="_blank"><img src="{{ asset('frontend/images/fb.png') }}" alt=""></a>
-                        <a href="#" target="_blank"><img src="{{ asset('frontend/images/twitter.png') }}" alt=""></a>
-                        <a href="#" target="_blank"><img src="{{ asset('frontend/images/insta.png') }}" alt=""></a>
+                        <a href="#" target="_blank"><img src="{{ asset('frontend/images/fb.png') }}"
+                                alt=""></a>
+                        <a href="#" target="_blank"><img src="{{ asset('frontend/images/twitter.png') }}"
+                                alt=""></a>
+                        <a href="#" target="_blank"><img src="{{ asset('frontend/images/insta.png') }}"
+                                alt=""></a>
                     </div>
                     <h5>Developed and Maintained By DIT, Tripura</h5>
 
@@ -26,6 +29,24 @@
                     <p>Phone: <a href="#">1234567891</a></p>
 
                     <p>Email ID: <a href="#">societycultuaral@gmail.com</a></p>
+                    @if (Auth::check())
+                        @php
+                            $roleType = Auth::user()->role_type;
+                        @endphp
+
+                        @if ($roleType === 'chairman')
+                            <a href="{{ route('chairman.dashboard') }}" class="btn btn-primary">Dashboard</a>
+                        @elseif ($roleType === 'user')
+                            <a href="{{ route('user.profile') }}" class="btn btn-primary">Profile</a>
+                        @elseif ($roleType === 'manager')
+                            <a href="{{ route('manager.dashboard') }}" class="btn btn-primary">Dashboard</a>
+                        @else
+                            <a href="{{ url('/') }}" class="btn btn-primary">Home</a>
+                        @endif
+                    @else
+                        <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+                    @endif
+
                     <!-- <h6>www.cmotripura.gov.in</h6> -->
                 </div>
                 <div class="center">

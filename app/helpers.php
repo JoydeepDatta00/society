@@ -60,9 +60,9 @@ if (!function_exists('getHallsByAuditoriumId')) {
 if (!function_exists('getByAuditoriumName')) {
     function getByAuditoriumName($auditoriumId)
     {
-        $auditorium = Auditorium::where('id', $auditoriumId)->get();
+        $auditorium = Auditorium::where('id', $auditoriumId)->first();
         if ($auditorium) {
-            return $auditorium;
+            return $auditorium->name;
         }
         return null;
     }
@@ -82,7 +82,16 @@ if (!function_exists('getHallsByAuditoriumSlots')) {
 if (!function_exists('getHallsName')) {
     function getHallsName($hallid)
     {
-        return Auditoriumhall::where('id', $hallid)->get();
+        // Fetch a single auditorium hall by ID
+        $auditorium = Auditoriumhall::where('id', $hallid)->first();
+
+        // Check if the record is found and return the hall name
+        if ($auditorium) {
+            return $auditorium->auditorium_hall_name;
+        }
+
+        // Return a default value or an empty string if not found
+        return 'Hall not found';
     }
 }
 

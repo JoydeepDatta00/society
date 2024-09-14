@@ -17,6 +17,10 @@ class Auditoriumbooking extends Model
         'choose_auditorium',
         'auditorium_hall',
         'choose_slots',
-        'services'
+        'services',
+        'event_name',
+        'event_image',
+        'url_for_webcasting',
+        'user_id',
     ];
 }

@@ -17,7 +17,7 @@
                     </div>
                     <div class="logo-text">
                         <h2>Government of Tripura </h2>
-                        <h6>Society for Management of Cultural Complex</h6>
+                        <h6>Society for Management of Cultural  Complex</h6>
                     </div>
                 </div>
                 <div class="close-btn-box" onclick="closeNav()">
@@ -69,30 +69,30 @@
                         <img src="{{ asset('frontend/images/less-then.png') }}" alt="">
                     </li>
                 </a>
-
             </ul>
             <div class="sidepanel-foot">
                 <a href="book-auditorium.html"><button>Book An Auditorium</button></a>
                 <div class="social-links">
-                    <a href="#" target="_blank"><img src="{{ asset('frontend/images/fb.png') }}" alt=""></a>
-                    <a href="#" target="_blank"><img src="{{ asset('frontend/images/twitter.png') }}" alt=""></a>
-                    <a href="#" target="_blank"><img src="{{ asset('frontend/images/insta.png') }}" alt=""></a>
+                    <a href="#" target="_blank"><img src="{{ asset('frontend/images/fb.png') }}"
+                            alt=""></a>
+                    <a href="#" target="_blank"><img src="{{ asset('frontend/images/twitter.png') }}"
+                            alt=""></a>
+                    <a href="#" target="_blank"><img src="{{ asset('frontend/images/insta.png') }}"
+                            alt=""></a>
                 </div>
             </div>
-
-
         </div>
         <div class="side-pettarn">
             <img src="{{ asset('frontend/images/boxbottom.png') }}" alt="">
         </div>
     </div>
 </div>
-
 <header id="header">
     <div class="header">
         <div class="head-left">
-            <button onclick="openNav()"><img src="{{asset('frontend/images/menu.png') }}" alt=""></button>
-            <button onclick="searchfunction()" class="search"><img src="{{ asset('frontend/images/search.png') }}" alt=""></button>
+            <button onclick="openNav()"><img src="{{ asset('frontend/images/menu.png') }}" alt=""></button>
+            <button onclick="searchfunction()" class="search"><img src="{{ asset('frontend/images/search.png') }}"
+                    alt=""></button>
         </div>
         <div class="head-center">
             <a href="/">

@@ -30,29 +30,39 @@
 
         <div class="d-flex">
 
+            <div class="dropdown d-inline-block">
+                {{--
+                    {{-- <i class="ri-settings-2-line"></i>
+                --}}
+                {{-- <button type="button" class="btn header-item waves-effect"><span>Hall
+                        Name:</span>{{ getByAuditoriumName(Auth::user()->auditorium_id) }}</button> --}}
+            </div>
 
             <div class="dropdown d-inline-block user-dropdown">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                     {{-- <span class="d-none d-xl-inline-block ms-1">{{ Auth::user()->name }}</span> --}}
-                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                    <i class="ri-settings-2-line d-none d-xl-inline-block"></i>
                 </button>
+
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="/admin/edit/profile"><i class="ri-user-line align-middle me-1"></i>
-                        Profile</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="{{ route('admin.logout') }}"><i
-                            class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
+                    @if (Auth::check() && Auth::user()->role_type === 'chairman')
+                        <a class="dropdown-item" href="/admin/edit/profile"><i
+                                class="ri-user-line align-middle me-1"></i>
+                            Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="{{ route('admin.logout') }}"><i
+                                class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
                 </div>
+            @elseif (Auth::check() && Auth::user()->role_type === 'manager')
+                <a class="dropdown-item text-danger" href="{{ route('admin.logout') }}"><i
+                        class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
+                @endif
             </div>
 
-            <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                    <i class="ri-settings-2-line"></i>
-                </button>
-            </div>
+
 
         </div>
     </div>
