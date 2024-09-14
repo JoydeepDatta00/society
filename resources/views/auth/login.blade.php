@@ -19,7 +19,13 @@
 
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#chairman-login" role="tab">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#user-login" role="tab">
+                                <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                <span class="d-none d-sm-block">User Login</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " data-bs-toggle="tab" href="#chairman-login" role="tab">
                                 <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                 <span class="d-none d-sm-block">Chairman Login</span>
                             </a>
@@ -30,19 +36,16 @@
                                 <span class="d-none d-sm-block">Manager Login</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#user-login" role="tab">
-                                <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                <span class="d-none d-sm-block">User Login</span>
-                            </a>
-                        </li>
+
 
                     </ul>
 
                     <div class="tab-content" id="loginTabContent">
+
+                        <!-------chairman login-------->
                         <div class="tab-pane fade show active" id="chairman-login" role="tabpanel"
                             aria-labelledby="chairman-tab">
-                            <h4 class="text-muted text-center font-size-18"><b>chairman login</b></h4>
+                            <h4 class="text-muted text-center font-size-18  mt-4"><b>Chairman login</b></h4>
                             <div class="p-3">
                                 <form class="form-horizontal mt-3" method="POST" action="{{ route('login') }}">
                                     @csrf
@@ -77,7 +80,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group mb-0 row mt-2">
+                                    {{-- <div class="form-group mb-0 row mt-2">
                                         <div class="col-sm-7 mt-3">
                                             <a href="auth-recoverpw.html" class="text-muted"><i
                                                     class="mdi mdi-lock"></i>
@@ -88,13 +91,13 @@
                                             <a href="" class="text-muted"><i class="mdi mdi-account-circle"></i>
                                                 Create an account</a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </form>
                             </div>
                         </div>
                         <!------manager login--------->
                         <div class="tab-pane fade" id="manager-login" role="tabpanel" aria-labelledby="manager-tab">
-                            <h4 class="text-muted text-center font-size-18"><b>manager login</b></h4>
+                            <h4 class="text-muted text-center font-size-18 mt-4"><b>Manager login</b></h4>
 
                             <div class="p-3">
                                 <form class="form-horizontal mt-3" method="POST" action="{{ route('login') }}">
@@ -109,16 +112,15 @@
 
                                     <div class="form-group mb-3 row">
                                         <div class="col-12">
-                                            <input class="form-control" id="password" type="password"
-                                                name="password" required placeholder="Password">
+                                            <input class="form-control" id="password" type="password" name="password"
+                                                required placeholder="Password">
                                         </div>
                                     </div>
 
                                     <div class="form-group mb-3 row">
                                         <div class="col-12">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input"
-                                                    id="customCheck1">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck1">
                                                 <label class="form-label ms-1" for="customCheck1">Remember me</label>
                                             </div>
                                         </div>
@@ -132,25 +134,21 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group mb-0 row mt-2">
+                                    {{-- <div class="form-group mb-0 row mt-2">
                                         <div class="col-sm-7 mt-3">
                                             <a href="auth-recoverpw.html" class="text-muted"><i
                                                     class="mdi mdi-lock"></i>
                                                 Forgot
                                                 your password?</a>
                                         </div>
-                                        <div class="col-sm-5 mt-3">
-                                            <a href="" class="text-muted"><i
-                                                    class="mdi mdi-account-circle"></i>
-                                                Create an account</a>
-                                        </div>
-                                    </div>
+
+                                    </div> --}}
                                 </form>
                             </div>
                         </div>
                         <!-------user login------->
                         <div class="tab-pane fade" id="user-login" role="tabpanel" aria-labelledby="user-tab">
-                            <h4 class="text-muted text-center font-size-18"><b>User login</b></h4>
+                            <h4 class="text-muted text-center font-size-18  mt-4"><b>User login</b></h4>
 
                             <div class="p-3">
                                 <form class="form-horizontal mt-3" method="POST" action="{{ route('login') }}">
@@ -204,6 +202,7 @@
                                 </form>
                             </div>
                         </div>
+
 
                     </div>
 

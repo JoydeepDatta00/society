@@ -1,6 +1,7 @@
 @php
-$gallery=getGalleryImages();
-$getGallery=$gallery->sortByDesc('created_at')->take(4);
+    $gallery = getGalleryImages();
+    $getGallery = $gallery->sortByDesc('created_at')->take(4);
+
 @endphp
 
 
@@ -15,20 +16,20 @@ $getGallery=$gallery->sortByDesc('created_at')->take(4);
             <a href="/gallery">View All</a>
         </div>
         <div class="gallery-grid">
-            @foreach ($getGallery as  $images)
-                    <a href="{{ '/gallery/images/' . $images['id'] }}">
-                        <div class="gallery-item">
-                            <img src="{{ Storage::url($images->gallery_thumbnail) }}" alt="">
-                            <div class="gallery-con">
-                                <h4>{{ $images->name }}</h4>
-                                <p>{{ $images->created_at->format('d-m-y') }}</p>
-                            </div>
-
+            @foreach ($getGallery as $images)
+                <a href="{{ '/gallery/images/' . encryptId($images['id']) }}">
+                    <div class="gallery-item">
+                        <img src="{{ Storage::url($images->gallery_thumbnail) }}" alt="">
+                        <div class="gallery-con">
+                            <h4>{{ $images->name }}</h4>
+                            <p>{{ $images->created_at->format('d-m-y') }}</p>
                         </div>
-                    </a>
+
+                    </div>
+                </a>
             @endforeach
 
-         
+
 
         </div>
     </div>

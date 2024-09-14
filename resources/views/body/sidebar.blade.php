@@ -24,12 +24,12 @@
                             <span>Add Banners</span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('admin.events') }}" class=" waves-effect">
                             <i class="ri-calendar-2-line"></i>
                             <span>Events</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a href="/chairman/thumbnail" class=" waves-effect">
                             <i class="ri-calendar-2-line"></i>
@@ -65,13 +65,17 @@
                     </li>
 
                     <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        {{-- <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="ri-map-pin-line"></i>
                             <span>Add Promotion Video</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="/chairman/add-promotion">Add Auditorium</a></li>
-                        </ul>
+                        </ul> --}}
+                        <a href=" /chairman/add-promotion" class="waves-effect">
+                            <i class="ri-dashboard-line"></i>
+                            <span>Add promotion</span>
+                        </a>
                     </li>
                 @elseif (Auth::check() && Auth::user()->role_type === 'manager')
                     <li>

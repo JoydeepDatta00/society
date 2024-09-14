@@ -1,6 +1,6 @@
 <footer>
     <div class="footer-flower-top-pattern">
-        <img src="images/Grey flower FOOTER.png" alt="">
+        <img src="{{ asset('frontend/images/Grey flower FOOTER.png') }}" alt="">
     </div>
     <div class="footer-layer">
         <div class="container">

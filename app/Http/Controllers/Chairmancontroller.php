@@ -229,11 +229,18 @@ class Chairmancontroller extends Controller
                 ]);
         }
     }
-    public function deleteBannerPromotion($id)
+    public function deleteBannerPromotion($promotion_id)
     {
-        $promotion = Promotions::find($id);
+        $decryptId = decryptId($promotion_id);
+        $promotion = Promotions::find($decryptId);
+
         if ($promotion) {
-            Storage::delete($promotion->promotion_images);
+            if (!empty($promotion->promotion_images) && Storage::exists($promotion->promotion_images)) {
+                // If it's a valid file path, delete it
+                Storage::delete($promotion->promotion_images);
+            }
+
+            // Storage::delete($promotion->promotion_images);
 
             $promotion->delete();
 

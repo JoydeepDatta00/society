@@ -5,6 +5,7 @@ namespace App\Http\Controllers\banner;
 use App\Models\Banners;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class Bannercontroller extends Controller
 {
@@ -21,9 +22,37 @@ class Bannercontroller extends Controller
             'banner_image' => $storeBannersImage
         ]);
         if ($storeBanners) {
-            return redirect()->back()->with('message', 'Banners added successfully!');
+            return redirect()->back()->with([
+                'message' => 'Banner updated  successfully ',
+                'alert-type' => 'success'
+            ]);
         } else {
-            return redirect()->back()->with('error', 'banner not found ');
+            return redirect()->back()->with([
+                'message' => ' Banner image not there ',
+                'alert-type' => 'error'
+            ]);
+        }
+    }
+    public function deleteBanner($banner_id)
+    {
+        $decryptId = decryptId($banner_id);
+
+        $banner = Banners::find($decryptId);
+
+        if ($banner) {
+            // Delete the event
+            Storage::delete($banner->banner_image);
+            $banner->delete();
+
+            return redirect()->back()->with([
+                'message' => 'Banner Deleted successfully ',
+                'alert-type' => 'success'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'message' => 'Banner image not found ',
+                'alert-type' => 'error'
+            ]);
         }
     }
 }

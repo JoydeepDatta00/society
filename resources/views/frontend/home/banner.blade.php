@@ -52,7 +52,7 @@
                                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             @elseif ($promotion->promotion_images)
                                 <img class="img-fluid" src="{{ Storage::url($promotion?->promotion_images) }}"
-                                    alt="">
+                                    alt="" style="width:420px">
                             @else
                             @endif
 

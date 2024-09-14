@@ -122,4 +122,43 @@ class Admincontroller extends Controller
             return redirect('/');
         }
     }
+    public function editManager($manager_id)
+    {
+        $decryptId = decryptId($manager_id);
+        $manager = User::find($decryptId);
+
+
+        return view('admin.createmanager.edit_manager', compact('manager'));
+    }
+    public function  updateManager(Request $request)
+    {
+        $userData = User::find($request->manager_id);
+        $userData->name = $request->name;
+        $userData->email = strtolower($request->email);
+        $userData->role_type = $request->role_type;
+        $userData->auditorium_id = $request->auditorium_id;
+        // $userData->password = Hash::make($request->password);
+        if ($request->filled('password')) {
+            $userData->password = Hash::make($request->password);
+        }
+        $userData->phone_number = $request->phone_number;
+
+
+        if ($userData->save()) {
+            return redirect('/create-manager')->with([
+                'message' => 'data upadted successfully ',
+                'alert-type' => 'success'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'message' => 'please check all the field again ',
+                'alert-type' => 'error'
+            ]);
+        }
+    }
+    public function deleteManager($manager_id)
+    {
+        $decryptId = decryptId($manager_id);
+        $deleteManager = User::find($decryptId);
+    }
 }

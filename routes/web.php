@@ -36,6 +36,9 @@ Route::middleware(['auth', 'isChairman'])->group(function () {
             return view('admin.createmanager.create_manager');
         });
         Route::post('/store-manager', 'createManager')->name('store.manager');
+        Route::get('/edit-manager/{manager_id}', 'editManager');
+        Route::post('/update_manager', 'updateManager')->name('update.manager');
+        Route::get('/delete-manager/{manager_id}', 'deleteManager');
     });
 });
 Route::middleware(['auth'])->group(
@@ -45,22 +48,22 @@ Route::middleware(['auth'])->group(
 );
 
 //=========EVENT SECTION============
-Route::middleware(['auth', 'isChairman'])->group(function () {
-    Route::controller(Eventcontroller::class)->group(function () {
-        Route::get('/admin/create-events', 'Events')->name('admin.events');
-        Route::post('/admin/store-events', 'createEvents')->name('admin.storeEvents');
-        Route::get('/admin/edit-event/{event_id}', 'editEvents')->name('admin.editEvents');
-        Route::post('/admin/update-event', 'updateEvents')->name('admin.updateEvents');
-        Route::get('/admin/delete-events/{event_id}', 'deleteEvents');
-        //event Gallery
-        Route::get('/admin/events-images/{event_id}', 'addEventsImage')->name('admin.addEventsImage');
-        Route::post('/admin/add-event-gallery', 'addEventImagesArray')->name('admin.storeEventGallery');
-        Route::get('/admin/delete-events-gallery/{event_id}', 'deleteEventsGallery');
-        // Route::get('/create-manager', function () {
-        //     return view('admin.createmanager.create_manager');
-        // });
-    });
-});
+// Route::middleware(['auth', 'isChairman'])->group(function () {
+//     Route::controller(Eventcontroller::class)->group(function () {
+//         Route::get('/admin/create-events', 'Events')->name('admin.events');
+//         Route::post('/admin/store-events', 'createEvents')->name('admin.storeEvents');
+//         Route::get('/admin/edit-event/{event_id}', 'editEvents')->name('admin.editEvents');
+//         Route::post('/admin/update-event', 'updateEvents')->name('admin.updateEvents');
+//         Route::get('/admin/delete-events/{event_id}', 'deleteEvents');
+//         //event Gallery
+//         Route::get('/admin/events-images/{event_id}', 'addEventsImage')->name('admin.addEventsImage');
+//         Route::post('/admin/add-event-gallery', 'addEventImagesArray')->name('admin.storeEventGallery');
+//         Route::get('/admin/delete-events-gallery/{event_id}', 'deleteEventsGallery');
+//         // Route::get('/create-manager', function () {
+//         //     return view('admin.createmanager.create_manager');
+//         // });
+//     });
+// });
 
 //===========GALLERY SECTION==========
 Route::middleware(['auth', 'isChairman'])->group(function () {
@@ -104,7 +107,7 @@ Route::middleware(['auth', 'isChairman'])->group(function () {
         //=========Add promotion in banner=====
         Route::get('/chairman/add-promotion', 'bannerPromotion');
         Route::post('/chairman/store-Promotion', 'storeBannerPromotion')->name('chairman.storepromotion');
-        Route::get('/delete-promotions/{prmotion_id}', 'deleteBannerPromotion');
+        Route::get('/delete-promotions/{promotion_id}', 'deleteBannerPromotion');
     });
 });
 //============members section===========
@@ -127,6 +130,7 @@ Route::middleware(['auth', 'isChairman'])->group(
                     return view('admin.banner.banners');
                 });
                 Route::post('/chairman/banner', 'storeBannerImages')->name('admin.storebanner');
+                Route::get('/chairman/delete-banner/{banner_id}', 'deleteBanner');
             }
         );
     }
