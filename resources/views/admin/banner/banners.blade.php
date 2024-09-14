@@ -28,7 +28,7 @@
                             <!-- end row -->
 
                             <!-- <div class="card">
-                    <div class="card-body">--->
+                                                                                                                            <div class="card-body">--->
                             <div class="row mb-3">
 
                                 <div class="input-group">
@@ -38,7 +38,7 @@
 
                             </div>
                             <!-- </div>
-                </div>-->
+                                                                                                                        </div>-->
                             <!-- end row -->
 
                             <input type="submit" class="btn btn-success btn-rounded waves-effect waves-light"
@@ -118,7 +118,7 @@
                                             <td>
 
 
-                                                <a href="{{ ' /chairman/delete-gallery/' . $item['id'] }}"
+                                                <a href="{{ '/chairman/delete-banner/' . encryptId($item['id']) }}"
                                                     class="btn btn-danger sm" title="Delete Data" id="delete"> <i
                                                         class="fas fa-trash"></i></a>
                                             </td>

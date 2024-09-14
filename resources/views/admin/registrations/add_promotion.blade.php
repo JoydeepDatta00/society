@@ -47,7 +47,7 @@
                             </div>
 
                             <input type="submit" class="btn btn-success btn-rounded waves-effect waves-light"
-                                name="submit" value="Add Auditorium services " id="submitBtn">
+                                name="submit" value="Add Promotions " id="submitBtn">
 
                         </form>
 
@@ -95,7 +95,7 @@
                                                 <td>
 
 
-                                                    <a href="{{ ' /chairman/delete-gallery/' . $item['id'] }}"
+                                                    <a href="{{ ' /delete-promotions/ ' . encryptId($item['id']) }}"
                                                         class="btn btn-danger sm" title="Delete Data" id="delete"> <i
                                                             class="fas fa-trash"></i></a>
                                                 </td>
